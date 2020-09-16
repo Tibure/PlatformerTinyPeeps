@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: 1b6fe319fa35b0d48b63b6261d2ef484
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2894541984437985714
+    second: Owlet_Monster_Run_6_0
+  - first:
+      213: -3093921610328536487
+    second: Owlet_Monster_Run_6_1
+  - first:
+      213: 2231938372530369278
+    second: Owlet_Monster_Run_6_2
+  - first:
+      213: -7817062518656586233
+    second: Owlet_Monster_Run_6_3
+  - first:
+      213: 4362139675536756813
+    second: Owlet_Monster_Run_6_4
+  - first:
+      213: -7023884108258751941
+    second: Owlet_Monster_Run_6_5
+  - first:
+      213: 552464775754641186
+    second: Owlet_Monster_Run_6_0
+  - first:
+      213: 4083612314997666404
+    second: Owlet_Monster_Run_6_1
+  - first:
+      213: 2517934114316662111
+    second: Owlet_Monster_Run_6_2
+  - first:
+      213: 8103397732446112644
+    second: Owlet_Monster_Run_6_3
+  - first:
+      213: -6637190564246234350
+    second: Owlet_Monster_Run_6_4
+  - first:
+      213: -2999492004860854076
+    second: Owlet_Monster_Run_6_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -45,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -85,7 +121,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Owlet_Monster_Run_6_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22f65c559cfbaa700800000000000000
+      internalID: 552464775754641186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Owlet_Monster_Run_6_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 462b8dbb3c7eba830800000000000000
+      internalID: 4083612314997666404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Owlet_Monster_Run_6_2
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 0
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55bea38cbf71f220800000000000000
+      internalID: 2517934114316662111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Owlet_Monster_Run_6_3
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 1
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48b0824dd4d057070800000000000000
+      internalID: 8103397732446112644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Owlet_Monster_Run_6_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 1
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21b578fd856f3e3a0800000000000000
+      internalID: -6637190564246234350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Owlet_Monster_Run_6_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c005afd9e9af56d0800000000000000
+      internalID: -2999492004860854076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

@@ -7,8 +7,7 @@ public class PlayerPlateformerController : PhysicsObject
 {
 	public float maxSpeed = 7;
 	public float jumpTakeOffSpeed = 7;
-	private SpriteRenderer spriteRenderer;
-	private Animator animator;
+
 
 	// Start is called before the first frame update
 	void Awake()
@@ -24,9 +23,11 @@ public class PlayerPlateformerController : PhysicsObject
 		if (Input.GetButtonDown("Jump") && grounded)
 		{
 			velocity.y = jumpTakeOffSpeed;
+			isJumping = true;
 		}
 		else if (Input.GetButtonUp("Jump"))
 		{
+			isJumping = false;
 			if (velocity.y > 0)
 			{
 				velocity.y = velocity.y * .5f;
@@ -37,9 +38,15 @@ public class PlayerPlateformerController : PhysicsObject
 		{
 			spriteRenderer.flipX = !spriteRenderer.flipX;
 		}
-		animator.SetBool("grounded", grounded);
-		animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+		//animator.SetBool("grounded", grounded);
+		//animator.SetFloat("xVelocity", Mathf.Abs(velocity.x) / maxSpeed);
 		targetVelocity = move * maxSpeed;
+        if (isRunning)
+        {
+			targetVelocity *= runSpeedModifier;
+		}
+
+		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
 	}
 }
 

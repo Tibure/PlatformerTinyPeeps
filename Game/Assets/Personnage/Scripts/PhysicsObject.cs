@@ -13,8 +13,13 @@ public class PhysicsObject : MonoBehaviour
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected const float shellRadius = 0.01f;
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+    protected Animator animator;
+    protected SpriteRenderer spriteRenderer;
     public float minGroundNormalY = .65f;
     protected bool grounded;
+    protected float runSpeedModifier = 1.5f;
+    [SerializeField]protected bool isRunning = false;
+    [SerializeField] protected bool isJumping = false;
     protected Vector2 groundNormal;
     protected Vector2 targetVelocity;
 
@@ -30,12 +35,22 @@ public class PhysicsObject : MonoBehaviour
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         targetVelocity = Vector2.zero;
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isRunning = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isRunning = false;
+        }
         ComputeVelocity();
     }
     protected virtual void ComputeVelocity()
@@ -88,10 +103,8 @@ public class PhysicsObject : MonoBehaviour
 
                 float modifiedDistance = hitBufferList[i].distance - shellRadius;
                 distance = modifiedDistance < distance ? modifiedDistance : distance;
-
             }
         }
-
         rb2d.position = rb2d.position + move.normalized * distance;
     }
 }
