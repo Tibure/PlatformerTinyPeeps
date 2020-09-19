@@ -1,52 +1,59 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PlayerPlateformerController : PhysicsObject
 {
-	public float maxSpeed = 7;
-	public float jumpTakeOffSpeed = 7;
-
-
 	// Start is called before the first frame update
 	void Awake()
 	{
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		animator = GetComponent<Animator>();
 	}
-
+	protected override void GroundCheck()
+	{
+		isGrounded = false;
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
+        if (colliders.Length > 0)
+        {
+			isGrounded = true;
+        }
+		isJumping = !isGrounded;
+		animator.SetBool("isJumping", isJumping);
+	}
 	protected override void ComputeVelocity()
 	{
-		Vector2 move = Vector2.zero;
-		move.x = Input.GetAxis("Horizontal");
-		if (Input.GetButtonDown("Jump") && grounded)
+		if (Input.GetButtonDown("Jump") && isGrounded)
 		{
 			velocity.y = jumpTakeOffSpeed;
 			isJumping = true;
 		}
 		else if (Input.GetButtonUp("Jump"))
 		{
-			isJumping = false;
 			if (velocity.y > 0)
 			{
 				velocity.y = velocity.y * .5f;
 			}
 		}
+		animator.SetBool("isJumping", isJumping);
+		animator.SetFloat("yVelocity", velocity.y);
+
+		Vector2 move = Vector2.zero;
+		move.x = Input.GetAxis("Horizontal");
 		bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < -0.01f));
 		if (flipSprite)
 		{
 			spriteRenderer.flipX = !spriteRenderer.flipX;
 		}
-		//animator.SetBool("grounded", grounded);
-		//animator.SetFloat("xVelocity", Mathf.Abs(velocity.x) / maxSpeed);
 		targetVelocity = move * maxSpeed;
         if (isRunning)
         {
 			targetVelocity *= runSpeedModifier;
 		}
-
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
+
+
+		Debug.Log(rb2d.velocity.y);
 	}
 }
 
