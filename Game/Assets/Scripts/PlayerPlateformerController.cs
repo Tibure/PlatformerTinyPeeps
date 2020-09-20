@@ -6,10 +6,6 @@ using UnityEngine.UIElements;
 
 public class PlayerPlateformerController : PhysicsObject
 {
-	// Start is called before the first frame update
-	void Awake()
-	{
-	}
 	protected override void GroundCheck()
 	{
 		isGrounded = false;
@@ -20,6 +16,10 @@ public class PlayerPlateformerController : PhysicsObject
         }
 		isJumping = !isGrounded;
 		animator.SetBool("isJumping", isJumping);
+	}
+	public override void HurtTrigger()
+	{
+		animator.SetTrigger("HurtTrigger");
 	}
 	protected override void ComputeVelocity()
 	{
@@ -51,9 +51,6 @@ public class PlayerPlateformerController : PhysicsObject
 			targetVelocity *= runSpeedModifier;
 		}
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
-
-
-		Debug.Log(rb2d.velocity.y);
 	}
 }
 

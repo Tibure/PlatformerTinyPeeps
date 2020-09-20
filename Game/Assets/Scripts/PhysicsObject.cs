@@ -130,4 +130,8 @@ public class PhysicsObject : MonoBehaviour
     {
 
     }
+    public virtual void HurtTrigger()
+    {
+
+    }
 }
