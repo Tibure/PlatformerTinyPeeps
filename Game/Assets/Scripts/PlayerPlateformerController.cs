@@ -20,12 +20,14 @@ public class PlayerPlateformerController : PhysicsObject
 	public override void HurtTrigger()
 	{
 		animator.SetTrigger("HurtTrigger");
+		AudioManager.instance.PlaySFX("hurt");
 	}
 	protected override void ComputeVelocity()
 	{
 		if (Input.GetButtonDown("Jump") && isGrounded)
 		{
 			velocity.y = jumpTakeOffSpeed;
+			AudioManager.instance.PlaySFX("jump");
 			isJumping = true;
 		}
 		else if (Input.GetButtonUp("Jump"))
