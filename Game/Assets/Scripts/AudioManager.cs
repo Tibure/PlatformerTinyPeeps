@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     void Awake() { instance = this; }
     public List<AudioClip> sfxLibrary;
-    public AudioClip sfx_jump, sfx_hurt;
+    public AudioClip sfx_jump, sfx_hurt, sfx_running;
     public GameObject soundObject;
 
     public void PlaySFX(string SFXName)
@@ -20,6 +20,9 @@ public class AudioManager : MonoBehaviour
                 break;
             case "hurt":
                 SoundObjectCreation(sfx_hurt);
+                break;
+            case "running":
+                SoundObjectCreation(sfx_running);
                 break;
         }    
     }
