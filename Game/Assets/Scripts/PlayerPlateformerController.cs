@@ -6,7 +6,17 @@ using UnityEngine.UIElements;
 
 public class PlayerPlateformerController : PhysicsObject
 {
-	protected override void GroundCheck()
+    protected override void WallCheck()
+    {
+        isTouchingWall = false;
+        Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
+        if(colliders.length > 0)
+        {
+            isTouchingWall = true;
+        }
+    }
+
+    protected override void GroundCheck()
 	{
 		isGrounded = false;
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);

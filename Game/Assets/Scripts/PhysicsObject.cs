@@ -42,7 +42,14 @@ public class PhysicsObject : MonoBehaviour
     protected Vector2 velocity;
     protected Vector2 targetVelocity;
     ///////////////
-
+    // Wall Variables
+    ///////////////
+    protected bool isTouchingWall;
+    protected float wallJumpVelocityX = 1f;
+    protected float wallJumpVelocityY = 1f;
+    protected bool isWallSliding;
+    protected float wallSlidingSpeed = -0.5f;
+    ///////////////
     private void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -70,6 +77,7 @@ public class PhysicsObject : MonoBehaviour
             isRunning = false;
         }
         GroundCheck();
+        WallCheck();
         ComputeVelocity();
     }
     private void FixedUpdate()
@@ -131,6 +139,11 @@ public class PhysicsObject : MonoBehaviour
 
     }
     public virtual void HurtTrigger()
+    {
+
+    }
+
+    protected virtual void WallCheck()
     {
 
     }
