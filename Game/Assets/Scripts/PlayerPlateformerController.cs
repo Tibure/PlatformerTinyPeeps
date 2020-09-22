@@ -61,8 +61,9 @@ public class PlayerPlateformerController : PhysicsObject
 		}
 		targetVelocity = move * maxSpeed;
         if (isRunning)
-        {
-			targetVelocity *= runSpeedModifier;			
+        {        
+            //AudioManager.instance.PlaySFX("running");
+            targetVelocity *= runSpeedModifier;			
 		}
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
 	}
