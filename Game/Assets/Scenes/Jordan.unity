@@ -211,11 +211,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5302855239457559156, guid: 5c77a2e41b302c34b906bb9bcb87324e,
-        type: 3}
-      propertyPath: sfx_running
-      value: 
-      objectReference: {fileID: 8300000, guid: 83beb3522a0baed43a0c83948f7dfbbd, type: 3}
     - target: {fileID: 5302855239457559157, guid: 5c77a2e41b302c34b906bb9bcb87324e,
         type: 3}
       propertyPath: m_Name

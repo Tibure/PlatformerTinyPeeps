@@ -8,12 +8,14 @@ public class PlayerPlateformerController : PhysicsObject
 {
     protected override void WallCheck()
     {
-        isTouchingWall = false;
+       /*
+		isTouchingWall = false;
         Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
         if(colliders.length > 0)
         {
             isTouchingWall = true;
         }
+	   */
     }
 
     protected override void GroundCheck()
@@ -60,7 +62,7 @@ public class PlayerPlateformerController : PhysicsObject
 		targetVelocity = move * maxSpeed;
         if (isRunning)
         {
-			targetVelocity *= runSpeedModifier;
+			targetVelocity *= runSpeedModifier;			
 		}
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
 	}

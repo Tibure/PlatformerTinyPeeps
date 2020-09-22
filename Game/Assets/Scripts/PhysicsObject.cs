@@ -50,6 +50,9 @@ public class PhysicsObject : MonoBehaviour
     protected bool isWallSliding;
     protected float wallSlidingSpeed = -0.5f;
     ///////////////
+    ///Variable Sound
+    AudioSource source;
+    ///
     private void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -57,6 +60,7 @@ public class PhysicsObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
         contactFilter.useLayerMask = true;
@@ -75,6 +79,13 @@ public class PhysicsObject : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isRunning = false;
+        }
+        if (isRunning)
+        {
+            if (!source.isPlaying)
+            {
+            AudioManager.instance.PlaySFX("running");
+            }
         }
         GroundCheck();
         WallCheck();
