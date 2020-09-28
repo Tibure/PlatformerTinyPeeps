@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6174316240122739452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.234, y: -0.855, z: 0}
+  m_LocalPosition: {x: 0, y: -0.842, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6174316240642418472}
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6174316240642418482}
   - component: {fileID: 6174316240642418481}
   - component: {fileID: 6174316240642418473}
+  - component: {fileID: 1558154526}
   m_Layer: 0
   m_Name: Owlet_Monster
   m_TagString: Player
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRunning: 0
-  jumpTakeOffSpeed: 11
+  jumpTakeOffSpeed: 13
   gravityModifier: 1.9
   isJumping: 0
   isGrounded: 1
@@ -140,6 +141,11 @@ MonoBehaviour:
   groundCheckCollider: {fileID: 6174316240122739453}
   minGroundNormalY: 0.65
   maxSpeed: 7
+  targetVelocity: {x: 0, y: 0}
+  sfx_jump: {fileID: 8300000, guid: e11d9d33151c6b14f8f4591c814bf0eb, type: 3}
+  sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
+  sfx_running: {fileID: 8300000, guid: 83beb3522a0baed43a0c83948f7dfbbd, type: 3}
+  sfx_walk: {fileID: 8300000, guid: ecc22135c865421428ffbb3b4c6eb7a9, type: 3}
 --- !u!50 &6174316240642418483
 Rigidbody2D:
   serializedVersion: 4
@@ -224,3 +230,99 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   livesRemaining: 4
+--- !u!82 &1558154526
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174316240642418480}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

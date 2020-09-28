@@ -50,6 +50,8 @@ public class PhysicsObject : MonoBehaviour
     protected bool isWallSliding;
     protected float wallSlidingSpeed = -0.5f;
     ///////////////
+    protected AudioSource audioSource;
+    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk;
     private void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -62,6 +64,7 @@ public class PhysicsObject : MonoBehaviour
         contactFilter.useLayerMask = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -142,9 +145,10 @@ public class PhysicsObject : MonoBehaviour
     {
 
     }
-
     protected virtual void WallCheck()
     {
 
     }
+    protected virtual void UpdateAnimator()
+    { }
 }
