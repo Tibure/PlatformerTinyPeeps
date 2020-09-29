@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6174316240642418481}
   - component: {fileID: 6174316240642418473}
   - component: {fileID: 1558154526}
+  - component: {fileID: -5790648259595825887}
   m_Layer: 0
   m_Name: Owlet_Monster
   m_TagString: Player
@@ -326,3 +327,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5790648259595825887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174316240642418480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472fc3e1d605e734b94fc85790c4d8a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myEmerald: 0
+  emeraldNeeded: 0
+  portalPosition: {fileID: 0}
+  portalObject: {fileID: 3578862333662183028, guid: 874f4be6f934e8847bcf61904b600ef8,
+    type: 3}

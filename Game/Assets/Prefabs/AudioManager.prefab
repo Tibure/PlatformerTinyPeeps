@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxLibrary: []
-  sfx_jump: {fileID: 8300000, guid: 7cb83d24d06596e49b82b40c85d6011b, type: 3}
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
-  sfx_running: {fileID: 8300000, guid: 83beb3522a0baed43a0c83948f7dfbbd, type: 3}
+  sfx_portalOpen: {fileID: 8300000, guid: 225568d8a8c725340837b5b770672c8d, type: 3}
+  sfx_portalIdle: {fileID: 8300000, guid: 6f2ca4560b2c5764fb11c8076207543b, type: 3}
+  sfx_portalClose: {fileID: 8300000, guid: 8ca0faad89371e049a59034ab02c39a5, type: 3}
+  sfx_EmeraldCollect: {fileID: 8300000, guid: 5c46c0063ab39524e93282e858300d83, type: 3}
   soundObject: {fileID: 2462249880482849891, guid: 8bd1a3afa8e3895489f33044e47f7bf8,
     type: 3}

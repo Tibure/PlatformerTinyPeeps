@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     void Awake() { instance = this; }
     public List<AudioClip> sfxLibrary;
-    public AudioClip sfx_hurt;
+    public AudioClip sfx_hurt, sfx_portalOpen, sfx_portalClose, sfx_EmeraldCollect;
     public GameObject soundObject;
 
     public void PlaySFX(string SFXName)
@@ -17,7 +17,17 @@ public class AudioManager : MonoBehaviour
             case "hurt":
                 SoundObjectCreation(sfx_hurt);
                 break;
-        }    
+            case "portalOpen":
+                SoundObjectCreation(sfx_portalOpen);
+                break;
+            case "portalClose":
+                SoundObjectCreation(sfx_portalClose);
+                break;
+            case "emeraldCollect":
+                SoundObjectCreation(sfx_EmeraldCollect);
+                break;
+
+        }
     }
 
     public void SoundObjectCreation(AudioClip clip)
