@@ -52,6 +52,15 @@ public class PhysicsObject : MonoBehaviour
     ///////////////
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk;
+    ///////////////
+    [SerializeField] protected int direction;
+    [SerializeField] protected float startDashTime;
+    [SerializeField] protected float dashTime;
+    [SerializeField] protected float dashSpeed;
+    [SerializeField] protected float cooldownDashTime;
+    [SerializeField] protected float cooldownDash;
+
+
     private void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -82,6 +91,14 @@ public class PhysicsObject : MonoBehaviour
         GroundCheck();
         WallCheck();
         ComputeVelocity();
+        if (cooldownDashTime <= 0)
+        {
+            Dash();
+        }
+        else
+        {
+            cooldownDashTime -= Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {
@@ -131,8 +148,11 @@ public class PhysicsObject : MonoBehaviour
         }
         rb2d.position = rb2d.position + move.normalized * distance;
     }
+
     ////////////////////
     //Fonction Virtuelle
+    protected virtual void Dash()
+    { }
     protected virtual void ComputeVelocity()
     {
 

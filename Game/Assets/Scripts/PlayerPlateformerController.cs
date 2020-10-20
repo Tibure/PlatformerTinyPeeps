@@ -79,8 +79,43 @@ public class PlayerPlateformerController : PhysicsObject
 		}
 		UpdateAnimator();
 	}
-
-
+	protected override void Dash()
+	{
+		if (direction == 0)
+		{
+			if (Input.GetAxis("Horizontal") > 0 && Input.GetKeyDown(KeyCode.LeftControl))
+			{
+				direction = 1;
+			}
+			else if (Input.GetAxis("Horizontal") < 0 && Input.GetKeyDown(KeyCode.LeftControl))
+			{
+				direction = 1;
+			}
+		}
+		else
+		{
+			if (dashTime <= 0)
+			{
+				direction = 0;
+				dashTime = startDashTime;
+				cooldownDashTime = cooldownDash;
+				rb2d.velocity = Vector2.zero;
+			}
+			else
+			{
+				dashTime -= Time.deltaTime;
+				switch (direction)
+				{
+					case 1:
+						rb2d.velocity = Vector2.right * dashSpeed;
+						break;
+					case 2:
+						rb2d.velocity = Vector2.left * dashSpeed;
+						break;
+				}
+			}
+		}
+	}
 	private void PlayJumpSound()
 	{
 		audioSource.loop = false;

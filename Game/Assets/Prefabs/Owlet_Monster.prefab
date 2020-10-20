@@ -147,6 +147,12 @@ MonoBehaviour:
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
   sfx_running: {fileID: 8300000, guid: 83beb3522a0baed43a0c83948f7dfbbd, type: 3}
   sfx_walk: {fileID: 8300000, guid: ecc22135c865421428ffbb3b4c6eb7a9, type: 3}
+  direction: 0
+  startDashTime: 1
+  dashTime: 1
+  dashSpeed: 5
+  cooldownDashTime: 0
+  cooldownDash: 5
 --- !u!50 &6174316240642418483
 Rigidbody2D:
   serializedVersion: 4
