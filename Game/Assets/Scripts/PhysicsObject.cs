@@ -53,12 +53,17 @@ public class PhysicsObject : MonoBehaviour
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk;
     ///////////////
-    [SerializeField] protected int direction;
-    [SerializeField] protected float startDashTime;
+    protected bool isDashing;
     [SerializeField] protected float dashTime;
     [SerializeField] protected float dashSpeed;
-    [SerializeField] protected float cooldownDashTime;
-    [SerializeField] protected float cooldownDash;
+    [SerializeField] protected float distanceBetweenImage;
+    [SerializeField] protected float dashCooldown;
+    protected float dashTimeLeft;
+    protected float lastImageXPosition;
+    protected float lastDash = -100f;
+    ///////////////
+    protected bool canMove = true;
+    protected bool canFlip = true;
 
 
     private void OnEnable()
@@ -88,21 +93,23 @@ public class PhysicsObject : MonoBehaviour
         {
             isRunning = false;
         }
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            if (Time.time >= lastDash + dashCooldown)
+            {
+                Dash();
+            }
+        }
+        ComputeVelocity();
         GroundCheck();
         WallCheck();
-        ComputeVelocity();
-        if (cooldownDashTime <= 0)
-        {
-            Dash();
-        }
-        else
-        {
-            cooldownDashTime -= Time.deltaTime;
-        }
     }
     private void FixedUpdate()
     {
-        velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
+        if (!isDashing)
+        {
+            velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
+        }
         velocity.x = targetVelocity.x;
         isGrounded = false;
         Vector2 deltaPosition = velocity * Time.deltaTime;
@@ -149,10 +156,17 @@ public class PhysicsObject : MonoBehaviour
         rb2d.position = rb2d.position + move.normalized * distance;
     }
 
+    private void Dash()
+    {
+        isDashing = true;
+        dashTimeLeft = dashTime;
+        lastDash = Time.time;
+
+        PlayerAfterImagePool.Instance.GetFromPool();
+        lastImageXPosition = rb2d.transform.position.x;
+    }
     ////////////////////
     //Fonction Virtuelle
-    protected virtual void Dash()
-    { }
     protected virtual void ComputeVelocity()
     {
 

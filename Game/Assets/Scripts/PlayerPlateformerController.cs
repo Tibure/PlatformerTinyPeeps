@@ -7,47 +7,21 @@ using UnityEngine.UIElements;
 
 public class PlayerPlateformerController : PhysicsObject
 {
-    protected override void WallCheck()
-    {
-       /*
-		isTouchingWall = false;
-        Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
-        if(colliders.length > 0)
-        {
-            isTouchingWall = true;
-        }
-	   */
-    }
-
-    protected override void GroundCheck()
-	{
-		isGrounded = false;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
-        if (colliders.Length > 0)
-        {
-			isGrounded = true;
-        }
-		isJumping = !isGrounded;
-		animator.SetBool("isJumping", isJumping);
-	}
-	public override void HurtTrigger()
-	{
-		animator.SetTrigger("HurtTrigger");
-		AudioManager.instance.PlaySFX("hurt");
-	}
 	protected override void ComputeVelocity()
 	{
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis("Horizontal");
 		bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < -0.01f));
-		if (flipSprite)
+		DashCheck();
+		if (flipSprite && canFlip)
 		{
 			spriteRenderer.flipX = !spriteRenderer.flipX;
 		}
-
-		targetVelocity = move * maxSpeed;
-
-		if (isRunning)
+        if (canMove)
+        {
+			targetVelocity = move * maxSpeed;
+		}
+		if (isRunning && canMove)
 		{
 			targetVelocity *= runSpeedModifier;
 			PlayRunningSound();
@@ -56,7 +30,7 @@ public class PlayerPlateformerController : PhysicsObject
 		{
             audioSource.Stop();
         }
-		if (Input.GetButtonDown("Jump") && isGrounded)
+		if (Input.GetButtonDown("Jump") && isGrounded && canMove)
 		{
 			velocity.y = jumpTakeOffSpeed;
 			isJumping = true;
@@ -69,7 +43,7 @@ public class PlayerPlateformerController : PhysicsObject
 				velocity.y = velocity.y * .5f;
 			}
 		} 
-		if (move.x != 0 && isRunning == false && isGrounded == true)
+		if (move.x != 0 && !isRunning && !isDashing && isGrounded)
 		{
 			PlayWalkingSound();
 		}
@@ -79,42 +53,63 @@ public class PlayerPlateformerController : PhysicsObject
 		}
 		UpdateAnimator();
 	}
-	protected override void Dash()
+	private void DashCheck()
 	{
-		if (direction == 0)
+		if (isDashing)
 		{
-			if (Input.GetAxis("Horizontal") > 0 && Input.GetKeyDown(KeyCode.LeftControl))
+			if (dashTimeLeft > 0)
 			{
-				direction = 1;
-			}
-			else if (Input.GetAxis("Horizontal") < 0 && Input.GetKeyDown(KeyCode.LeftControl))
-			{
-				direction = 1;
-			}
-		}
-		else
-		{
-			if (dashTime <= 0)
-			{
-				direction = 0;
-				dashTime = startDashTime;
-				cooldownDashTime = cooldownDash;
-				rb2d.velocity = Vector2.zero;
-			}
-			else
-			{
-				dashTime -= Time.deltaTime;
-				switch (direction)
+				canMove = false;
+				isJumping = false;
+				canFlip = false;
+				if (spriteRenderer.flipX)
 				{
-					case 1:
-						rb2d.velocity = Vector2.right * dashSpeed;
-						break;
-					case 2:
-						rb2d.velocity = Vector2.left * dashSpeed;
-						break;
+					targetVelocity = new Vector2(-dashSpeed, 0);
+				}
+				else
+				{
+					targetVelocity = new Vector2(dashSpeed, 0);
+				}
+				
+				dashTimeLeft -= Time.deltaTime;
+
+				if (Mathf.Abs(rb2d.transform.position.x - lastImageXPosition) > distanceBetweenImage)
+				{
+					PlayerAfterImagePool.Instance.GetFromPool();
+					lastImageXPosition = rb2d.transform.position.x;
 				}
 			}
+
+			if (dashTimeLeft <= 0 /*|| isTouchingWall*/)
+			{
+				isDashing = false;
+				canMove = true;
+				canFlip = true;
+			}
 		}
+	}
+	protected override void WallCheck()
+	{
+		/*
+		 isTouchingWall = false;
+		 Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
+		 if(colliders.length > 0)
+		 {
+			 isTouchingWall = true;
+		 }
+		*/
+	}
+
+	protected override void GroundCheck()
+	{
+		isGrounded = false;
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
+		if (colliders.Length > 0)
+		{
+			isGrounded = true;
+		}
+		isJumping = !isGrounded;
+		animator.SetBool("isJumping", isJumping);
 	}
 	private void PlayJumpSound()
 	{
@@ -122,7 +117,6 @@ public class PlayerPlateformerController : PhysicsObject
 		audioSource.clip = sfx_jump;
 		audioSource.Play();
 	}
-
 	private void PlayRunningSound()
 	{
 		if (!audioSource.isPlaying)
@@ -132,7 +126,6 @@ public class PlayerPlateformerController : PhysicsObject
 			audioSource.Play();
 		}
 	}
-
 	private void PlayWalkingSound()
 	{
 		if (!audioSource.isPlaying)
@@ -142,12 +135,17 @@ public class PlayerPlateformerController : PhysicsObject
 			audioSource.Play();
 		}
 	}
-
 	protected override void UpdateAnimator()
 	{
 		animator.SetBool("isJumping", isJumping);
+		animator.SetBool("isDashing", isDashing);
 		animator.SetFloat("yVelocity", velocity.y);
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
+	}
+	public override void HurtTrigger()
+	{
+		animator.SetTrigger("HurtTrigger");
+		AudioManager.instance.PlaySFX("hurt");
 	}
 }
 

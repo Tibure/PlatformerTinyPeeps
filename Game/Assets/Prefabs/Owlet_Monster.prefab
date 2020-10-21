@@ -105,8 +105,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 399405109
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 767d2715a1a876d4a9fb262ca67fc511, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -147,12 +147,10 @@ MonoBehaviour:
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
   sfx_running: {fileID: 8300000, guid: 83beb3522a0baed43a0c83948f7dfbbd, type: 3}
   sfx_walk: {fileID: 8300000, guid: ecc22135c865421428ffbb3b4c6eb7a9, type: 3}
-  direction: 0
-  startDashTime: 1
-  dashTime: 1
-  dashSpeed: 5
-  cooldownDashTime: 0
-  cooldownDash: 5
+  dashTime: 0.15
+  dashSpeed: 35
+  distanceBetweenImage: 0.5
+  dashCooldown: 5
 --- !u!50 &6174316240642418483
 Rigidbody2D:
   serializedVersion: 4
