@@ -512,7 +512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4692492321172976611}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &880320010
 Tilemap:
@@ -880,7 +880,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4692492321172976611}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &1768978639
 Tilemap:
@@ -1158,7 +1158,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4692492321172976611}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &4692492320347533678
 Tilemap:
@@ -5168,7 +5168,7 @@ GameObject:
   - component: {fileID: 4692492320512656077}
   m_Layer: 8
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5185,7 +5185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4692492321172976611}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &4692492320512656079
 Tilemap:
@@ -7878,10 +7878,10 @@ Transform:
   m_LocalPosition: {x: -30.64, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children:
-  - {fileID: 4692492320512656065}
   - {fileID: 4692492320347533664}
   - {fileID: 1768978637}
   - {fileID: 880320008}
+  - {fileID: 4692492320512656065}
   - {fileID: 555710995}
   - {fileID: 8896778171002592168}
   - {fileID: 8896778172233677013}
@@ -7916,6 +7916,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Emerald (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039055741503461652, guid: e05e3b2334eb78347b82ca51c3069099,
+        type: 3}
+      propertyPath: m_TagString
+      value: Finish
       objectReference: {fileID: 0}
     - target: {fileID: 8896778173079455857, guid: e05e3b2334eb78347b82ca51c3069099,
         type: 3}

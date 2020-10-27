@@ -64,7 +64,15 @@ public class PhysicsObject : MonoBehaviour
     ///////////////
     protected bool canMove = true;
     protected bool canFlip = true;
-
+    ///////////////
+    [SerializeField] protected bool isGrappling = false;
+    protected bool checkClick;
+    protected DistanceJoint2D myDistanceJoint2D;
+    protected LineRenderer myLineRenderer;
+    protected RaycastHit2D myRaycast;
+    protected Vector3 myMousePos;
+    protected Vector3 posTempo;
+    protected Camera myCamera;
 
     private void OnEnable()
     {
@@ -79,11 +87,20 @@ public class PhysicsObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        myCamera = Camera.main;
+        myDistanceJoint2D = GetComponent<DistanceJoint2D>();
+        myLineRenderer = GetComponent<LineRenderer>();
+        myDistanceJoint2D.enabled = false;
+        checkClick = true;
+        myLineRenderer.positionCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateGrapplin();        
+        GroundCheck();
+        WallCheck();
         targetVelocity = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -101,12 +118,11 @@ public class PhysicsObject : MonoBehaviour
             }
         }
         ComputeVelocity();
-        GroundCheck();
-        WallCheck();
+
     }
     private void FixedUpdate()
     {
-        if (!isDashing)
+        if (!isDashing && !isGrappling)
         {
             velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
         }
@@ -184,5 +200,11 @@ public class PhysicsObject : MonoBehaviour
 
     }
     protected virtual void UpdateAnimator()
+    { }
+    protected virtual void DrawGrapplinLine()
+    { }
+    protected virtual void UpdateMousePosition()
+    { }
+    protected virtual void UpdateGrapplin()
     { }
 }

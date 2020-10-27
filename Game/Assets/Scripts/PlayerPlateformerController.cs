@@ -53,6 +53,60 @@ public class PlayerPlateformerController : PhysicsObject
 		}
 		UpdateAnimator();
 	}
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Vector3 test = new Vector3(myRaycast.point.x, myRaycast.point.y, 35);
+		Gizmos.DrawSphere(test, 1);
+	}
+	protected override void UpdateGrapplin()
+	{
+		UpdateMousePosition();
+		int layerMask = 1 << 8;
+		Debug.DrawLine(gameObject.transform.position, myMousePos);
+		Vector3 distanceRaycast = myMousePos - gameObject.transform.position;
+		distanceRaycast.z = 0;
+		myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
+		if (myRaycast.collider != null)
+		{
+			print(myRaycast.collider.gameObject.tag);
+			print(myRaycast.collider.gameObject.layer);
+		}
+
+		if (Input.GetMouseButtonDown(0) && checkClick && myRaycast.collider.gameObject.tag == "ground")
+		{
+			isGrappling = true;
+			gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+			myDistanceJoint2D.enabled = true;
+			myDistanceJoint2D.connectedAnchor = myRaycast.point;
+			myLineRenderer.positionCount = 2;
+			posTempo = myRaycast.point;
+			checkClick = false;
+		}
+		else if (Input.GetMouseButtonDown(0))
+		{
+			gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+			gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+			myDistanceJoint2D.enabled = false;
+			myLineRenderer.positionCount = 0;
+			checkClick = true;
+			isGrappling = false;
+		}
+		DrawGrapplinLine();
+	}
+	protected override void DrawGrapplinLine()
+	{
+		if (myLineRenderer.positionCount <= 0)
+		{
+			return;
+		}
+		myLineRenderer.SetPosition(0, transform.position);
+		myLineRenderer.SetPosition(1, posTempo);
+	}
+	protected override void UpdateMousePosition()
+	{
+		myMousePos = myCamera.ScreenToWorldPoint(Input.mousePosition);
+	}
 	private void DashCheck()
 	{
 		if (isDashing)
@@ -141,6 +195,7 @@ public class PlayerPlateformerController : PhysicsObject
 		animator.SetBool("isDashing", isDashing);
 		animator.SetFloat("yVelocity", velocity.y);
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
+		
 	}
 	public override void HurtTrigger()
 	{
