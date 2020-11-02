@@ -13,6 +13,7 @@ public class PlayerPlateformerController : PhysicsObject
 		move.x = Input.GetAxis("Horizontal");
 		bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < -0.01f));
 		DashCheck();
+		WallCheck();
 		if (flipSprite && canFlip)
 		{
 			spriteRenderer.flipX = !spriteRenderer.flipX;
@@ -70,8 +71,8 @@ public class PlayerPlateformerController : PhysicsObject
 		myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
 		if (myRaycast.collider != null)
 		{
-			print(myRaycast.collider.gameObject.tag);
-			print(myRaycast.collider.gameObject.layer);
+			/* print(myRaycast.collider.gameObject.tag);
+			print(myRaycast.collider.gameObject.layer); */
 		}
 
 		if (Input.GetMouseButtonDown(0) && checkClick && myRaycast.collider.gameObject.tag == "ground")
@@ -149,20 +150,28 @@ public class PlayerPlateformerController : PhysicsObject
 	}
 	protected override void WallCheck()
 	{
-		/*
-		 isTouchingWall = false;
-		 Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
-		 if(colliders.length > 0)
-		 {
-			 isTouchingWall = true;
+		float flipValue = spriteRenderer.flipX ? -0.4f : 0.4f ;
+
+		Vector2 frontCheckLocation = new Vector2(rb2d.position.x +flipValue , rb2d.position.y);
+		 isTouchingFront = Physics2D.OverlapCircle(frontCheckLocation, groundCheckRadius, groundLayer);
+		 if( isTouchingFront == true && isGrounded == false && Input.GetAxisRaw("Horizontal") != 0f){
+			 wallSliding = true;
+			 print(wallSliding);
+		 }else{
+			 wallSliding = false;
 		 }
-		*/
+
+		 if(wallSliding){
+			 /* rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y, -wallSlidingSpeed, float.MaxValue)); */
+			 //apparament ne fonctionne pas...
+		 }
 	}
 
 	protected override void GroundCheck()
 	{
 		isGrounded = false;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
+		Vector2 GroundCheckLocation = new Vector2(rb2d.position.x, (rb2d.position.y - 0.7f));
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(GroundCheckLocation, groundCheckRadius, groundLayer);
 		if (colliders.Length > 0)
 		{
 			isGrounded = true;

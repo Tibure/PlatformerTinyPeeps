@@ -30,7 +30,6 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected bool isGrounded = true;
     [SerializeField] protected LayerMask groundLayer;
     protected const float groundCheckRadius = 0.2f;
-    [SerializeField] protected Transform groundCheckCollider;
     protected Vector2 groundNormal;
     public float minGroundNormalY = .65f;
     ///////////////
@@ -44,11 +43,9 @@ public class PhysicsObject : MonoBehaviour
     ///////////////
     // Wall Variables
     ///////////////
-    protected bool isTouchingWall;
-    protected float wallJumpVelocityX = 1f;
-    protected float wallJumpVelocityY = 1f;
-    protected bool isWallSliding;
-    protected float wallSlidingSpeed = -0.5f;
+    public bool isTouchingFront;
+    public bool wallSliding;
+    [SerializeField] protected float wallSlidingSpeed = 0.5f;
     ///////////////
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash;
@@ -100,7 +97,6 @@ public class PhysicsObject : MonoBehaviour
     {
         UpdateGrapplin();        
         GroundCheck();
-        WallCheck();
         targetVelocity = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
