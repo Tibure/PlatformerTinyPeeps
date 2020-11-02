@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class PlayerAfterImagePool : MonoBehaviour
 {
-
     [SerializeField] private GameObject afterImagePrefab;
-
     private Queue<GameObject> availableObjects = new Queue<GameObject>();
-
     public static PlayerAfterImagePool Instance { get; private set; }
-
     private void Awake()
     {
         Instance = this;
@@ -39,7 +35,6 @@ public class PlayerAfterImagePool : MonoBehaviour
         {
             GrowPool();
         }
-
         var instance = availableObjects.Dequeue();
         instance.SetActive(true);
         return instance;

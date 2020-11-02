@@ -26,9 +26,7 @@ public class PlayerAfterImageSprite : MonoBehaviour
         alpha = alphaSet;
         SR.sprite = playerSR.sprite;
         transform.position = player.transform.position;
-        /////////////////// A REGLER, LA ROTATION EST MAUVAISE VERS LA GAUCHE !
-        transform.rotation = player.transform.rotation;
-        //////////////////
+        SR.flipX = playerSR.flipX;
         timeActivated = Time.time;
     }
 

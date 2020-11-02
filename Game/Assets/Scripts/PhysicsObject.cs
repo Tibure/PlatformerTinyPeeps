@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhysicsObject : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class PhysicsObject : MonoBehaviour
     ///////////////
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash;
+    [SerializeField] protected bool DashSoundHasBeenPlayed = false;
     ///////////////
     protected bool isDashing;
     [SerializeField] protected float dashTime;
@@ -61,6 +63,9 @@ public class PhysicsObject : MonoBehaviour
     protected float dashTimeLeft;
     protected float lastImageXPosition;
     protected float lastDash = -100f;
+    [SerializeField] protected Text dashText;
+    protected bool isDashInCoolDown;
+    protected float timerDash;
     ///////////////
     protected bool canMove = true;
     protected bool canFlip = true;
@@ -73,6 +78,10 @@ public class PhysicsObject : MonoBehaviour
     protected Vector3 myMousePos;
     protected Vector3 posTempo;
     protected Camera myCamera;
+    [SerializeField] protected Text grapplingText;
+    protected bool isGrapplingInCoolDown;
+    protected float timerGrappling;
+    [SerializeField] protected float grapplingCooldown;
 
     private void OnEnable()
     {
@@ -101,6 +110,31 @@ public class PhysicsObject : MonoBehaviour
         UpdateGrapplin();        
         GroundCheck();
         WallCheck();
+
+        if (timerDash < 1)
+        {
+            dashText.text = "✔";
+            isDashInCoolDown = false;
+        }
+        else
+        {
+            timerDash -= Time.deltaTime;
+            dashText.text = Mathf.Round(timerDash).ToString();
+            isDashInCoolDown = true;
+        }
+
+        if (timerGrappling < 1)
+        {
+            grapplingText.text = "✔";
+            isGrapplingInCoolDown = false;
+        }
+        else
+        {
+            timerGrappling -= Time.deltaTime;
+            grapplingText.text = Mathf.Round(timerGrappling).ToString();
+            isGrapplingInCoolDown = true;
+        }
+
         targetVelocity = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -112,10 +146,9 @@ public class PhysicsObject : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            if (Time.time >= lastDash + dashCooldown)
+            if (!isDashInCoolDown)
             {
                 Dash();
-                PlayDashSound();
             }
         }
         ComputeVelocity();
@@ -172,16 +205,15 @@ public class PhysicsObject : MonoBehaviour
         }
         rb2d.position = rb2d.position + move.normalized * distance;
     }
-
     private void Dash()
     {
+        PlayDashSound();
         isDashing = true;
         dashTimeLeft = dashTime;
         lastDash = Time.time;
         PlayerAfterImagePool.Instance.GetFromPool();
         lastImageXPosition = rb2d.transform.position.x;
     }
-
     ////////////////////
     //Fonction Virtuelle
     protected virtual void ComputeVelocity()
@@ -208,8 +240,5 @@ public class PhysicsObject : MonoBehaviour
     { }
     protected virtual void UpdateGrapplin()
     { }
-    protected virtual void PlayDashSound()
-    {
-        
-    }
+    protected virtual void PlayDashSound() { }
 }

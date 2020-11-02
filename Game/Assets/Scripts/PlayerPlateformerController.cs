@@ -47,7 +47,7 @@ public class PlayerPlateformerController : PhysicsObject
 		{
 			PlayWalkingSound();
 		}
-		else if (move.x == 0 && velocity.y == 0)
+		else if (move.x == 0 && velocity.y == 0 && !isDashing)
 		{
 			audioSource.Stop();
 		}
@@ -74,7 +74,7 @@ public class PlayerPlateformerController : PhysicsObject
 			print(myRaycast.collider.gameObject.layer);
 		}
 
-		if (Input.GetMouseButtonDown(0) && checkClick && myRaycast.collider.gameObject.tag == "ground")
+		if (Input.GetMouseButtonDown(0) && checkClick && myRaycast.collider.gameObject.tag == "ground" && !isGrapplingInCoolDown)
 		{
 			PlayGrapplingSound();
 			isGrappling = true;
@@ -94,6 +94,7 @@ public class PlayerPlateformerController : PhysicsObject
 			myLineRenderer.positionCount = 0;
 			checkClick = true;
 			isGrappling = false;
+			timerGrappling = grapplingCooldown;
 			rb2d.velocity = Vector2.zero;
 		}
 
@@ -116,6 +117,7 @@ public class PlayerPlateformerController : PhysicsObject
 	{
 		if (isDashing)
 		{
+			
 			if (dashTimeLeft > 0)
 			{
 				canMove = false;
@@ -138,37 +140,15 @@ public class PlayerPlateformerController : PhysicsObject
 					lastImageXPosition = rb2d.transform.position.x;
 				}
 			}
-
 			if (dashTimeLeft <= 0 /*|| isTouchingWall*/)
 			{
+				DashSoundHasBeenPlayed = false;
 				isDashing = false;
 				canMove = true;
 				canFlip = true;
+				timerDash = dashCooldown;
 			}
 		}
-	}
-	protected override void WallCheck()
-	{
-		/*
-		 isTouchingWall = false;
-		 Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
-		 if(colliders.length > 0)
-		 {
-			 isTouchingWall = true;
-		 }
-		*/
-	}
-
-	protected override void GroundCheck()
-	{
-		isGrounded = false;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
-		if (colliders.Length > 0)
-		{
-			isGrounded = true;
-		}
-		isJumping = !isGrounded;
-		animator.SetBool("isJumping", isJumping);
 	}
 	private void PlayJumpSound()
 	{
@@ -178,10 +158,10 @@ public class PlayerPlateformerController : PhysicsObject
 	}
 	protected override void PlayDashSound()
 	{
-		print("coucou");
+		print("PlayDashSound");
 		audioSource.loop = false;
-		audioSource.clip = sfx_dash;
-		audioSource.Play();
+		audioSource.PlayOneShot(sfx_dash);
+		print("PlayDashSoundFin");
 	}
 	private void PlayGrapplingSound()
 	{
@@ -206,6 +186,28 @@ public class PlayerPlateformerController : PhysicsObject
 			audioSource.clip = sfx_walk;
 			audioSource.Play();
 		}
+	}
+	protected override void WallCheck()
+	{
+		/*
+		 isTouchingWall = false;
+		 Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
+		 if(colliders.length > 0)
+		 {
+			 isTouchingWall = true;
+		 }
+		*/
+	}
+	protected override void GroundCheck()
+	{
+		isGrounded = false;
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
+		if (colliders.Length > 0)
+		{
+			isGrounded = true;
+		}
+		isJumping = !isGrounded;
+		animator.SetBool("isJumping", isJumping);
 	}
 	protected override void UpdateAnimator()
 	{
