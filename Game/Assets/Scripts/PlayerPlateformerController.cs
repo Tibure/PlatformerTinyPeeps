@@ -62,6 +62,7 @@ public class PlayerPlateformerController : PhysicsObject
 	protected override void UpdateGrapplin()
 	{
 		UpdateMousePosition();
+
 		int layerMask = 1 << 8;
 		Debug.DrawLine(gameObject.transform.position, myMousePos);
 		Vector3 distanceRaycast = myMousePos - gameObject.transform.position;
@@ -75,6 +76,7 @@ public class PlayerPlateformerController : PhysicsObject
 
 		if (Input.GetMouseButtonDown(0) && checkClick && myRaycast.collider.gameObject.tag == "ground")
 		{
+			PlayGrapplingSound();
 			isGrappling = true;
 			gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 			myDistanceJoint2D.enabled = true;
@@ -82,6 +84,7 @@ public class PlayerPlateformerController : PhysicsObject
 			myLineRenderer.positionCount = 2;
 			posTempo = myRaycast.point;
 			checkClick = false;
+			rb2d.velocity = Vector2.zero;
 		}
 		else if (Input.GetMouseButtonDown(0))
 		{
@@ -91,7 +94,9 @@ public class PlayerPlateformerController : PhysicsObject
 			myLineRenderer.positionCount = 0;
 			checkClick = true;
 			isGrappling = false;
+			rb2d.velocity = Vector2.zero;
 		}
+
 		DrawGrapplinLine();
 	}
 	protected override void DrawGrapplinLine()
@@ -101,7 +106,7 @@ public class PlayerPlateformerController : PhysicsObject
 			return;
 		}
 		myLineRenderer.SetPosition(0, transform.position);
-		myLineRenderer.SetPosition(1, posTempo);
+		myLineRenderer.SetPosition(1, myDistanceJoint2D.connectedAnchor);
 	}
 	protected override void UpdateMousePosition()
 	{
@@ -171,6 +176,19 @@ public class PlayerPlateformerController : PhysicsObject
 		audioSource.clip = sfx_jump;
 		audioSource.Play();
 	}
+	protected override void PlayDashSound()
+	{
+		print("coucou");
+		audioSource.loop = false;
+		audioSource.clip = sfx_dash;
+		audioSource.Play();
+	}
+	private void PlayGrapplingSound()
+	{
+		audioSource.loop = false;
+		audioSource.clip = sfx_grappling;
+		audioSource.Play();
+	}
 	private void PlayRunningSound()
 	{
 		if (!audioSource.isPlaying)
@@ -192,6 +210,7 @@ public class PlayerPlateformerController : PhysicsObject
 	protected override void UpdateAnimator()
 	{
 		animator.SetBool("isJumping", isJumping);
+		animator.SetBool("isGrappling", isGrappling);
 		animator.SetBool("isDashing", isDashing);
 		animator.SetFloat("yVelocity", velocity.y);
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));

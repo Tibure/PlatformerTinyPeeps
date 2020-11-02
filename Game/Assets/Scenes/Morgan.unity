@@ -815,20 +815,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Owlet_Monster
       objectReference: {fileID: 0}
-    - target: {fileID: 6174316240642418483, guid: eed65a0cf24456a41af2d1e94f3c5dc7,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6174316240642418486, guid: eed65a0cf24456a41af2d1e94f3c5dc7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6174316240642418487, guid: eed65a0cf24456a41af2d1e94f3c5dc7,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed65a0cf24456a41af2d1e94f3c5dc7, type: 3}

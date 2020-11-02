@@ -39,7 +39,7 @@ public class PhysicsObject : MonoBehaviour
     public float maxSpeed = 7;
     protected const float minMoveDistance = 0.001f;
     protected const float shellRadius = 0.01f;
-    protected Vector2 velocity;
+    [SerializeField] protected Vector2 velocity;
     public Vector2 targetVelocity;
     ///////////////
     // Wall Variables
@@ -51,7 +51,7 @@ public class PhysicsObject : MonoBehaviour
     protected float wallSlidingSpeed = -0.5f;
     ///////////////
     protected AudioSource audioSource;
-    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk;
+    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash;
     ///////////////
     protected bool isDashing;
     [SerializeField] protected float dashTime;
@@ -115,6 +115,7 @@ public class PhysicsObject : MonoBehaviour
             if (Time.time >= lastDash + dashCooldown)
             {
                 Dash();
+                PlayDashSound();
             }
         }
         ComputeVelocity();
@@ -177,10 +178,10 @@ public class PhysicsObject : MonoBehaviour
         isDashing = true;
         dashTimeLeft = dashTime;
         lastDash = Time.time;
-
         PlayerAfterImagePool.Instance.GetFromPool();
         lastImageXPosition = rb2d.transform.position.x;
     }
+
     ////////////////////
     //Fonction Virtuelle
     protected virtual void ComputeVelocity()
@@ -207,4 +208,8 @@ public class PhysicsObject : MonoBehaviour
     { }
     protected virtual void UpdateGrapplin()
     { }
+    protected virtual void PlayDashSound()
+    {
+        
+    }
 }
