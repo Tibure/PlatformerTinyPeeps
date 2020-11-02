@@ -151,8 +151,6 @@ public class PlayerPlateformerController : PhysicsObject
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
 	protected override void WallCheck()
 	{
 		float flipValue = spriteRenderer.flipX ? -0.4f : 0.4f ;
@@ -171,7 +169,6 @@ public class PlayerPlateformerController : PhysicsObject
 			 //apparament ne fonctionne pas...
 		 }
 	}
-
 	protected override void GroundCheck()
 	{
 		isGrounded = false;
@@ -184,7 +181,6 @@ public class PlayerPlateformerController : PhysicsObject
 		isJumping = !isGrounded;
 		animator.SetBool("isJumping", isJumping);
 	}
->>>>>>> 99ca74a2c0ecd49679d4a209e605fa3ef55db91d
 	private void PlayJumpSound()
 	{
 		audioSource.loop = false;
@@ -221,28 +217,6 @@ public class PlayerPlateformerController : PhysicsObject
 			audioSource.clip = sfx_walk;
 			audioSource.Play();
 		}
-	}
-	protected override void WallCheck()
-	{
-		/*
-		 isTouchingWall = false;
-		 Collider2d[] collider = Physics2D.OverlapCircleAll(wallCheckCollider.position, wallCheckRadius, groundLayer);
-		 if(colliders.length > 0)
-		 {
-			 isTouchingWall = true;
-		 }
-		*/
-	}
-	protected override void GroundCheck()
-	{
-		isGrounded = false;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position, groundCheckRadius, groundLayer);
-		if (colliders.Length > 0)
-		{
-			isGrounded = true;
-		}
-		isJumping = !isGrounded;
-		animator.SetBool("isJumping", isJumping);
 	}
 	protected override void UpdateAnimator()
 	{

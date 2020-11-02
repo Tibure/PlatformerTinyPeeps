@@ -106,7 +106,6 @@ public class PhysicsObject : MonoBehaviour
     {
         UpdateGrapplin();        
         GroundCheck();
-<<<<<<< HEAD
         WallCheck();
 
         if (timerDash < 1)
@@ -132,9 +131,6 @@ public class PhysicsObject : MonoBehaviour
             grapplingText.text = Mathf.Round(timerGrappling).ToString();
             isGrapplingInCoolDown = true;
         }
-
-=======
->>>>>>> 99ca74a2c0ecd49679d4a209e605fa3ef55db91d
         targetVelocity = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

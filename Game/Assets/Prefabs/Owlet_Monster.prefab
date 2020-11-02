@@ -141,11 +141,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  groundCheckCollider: {fileID: 6174316240122739453}
   minGroundNormalY: 0.65
   maxSpeed: 7
   velocity: {x: 0, y: 0}
   targetVelocity: {x: 0, y: 0}
+  isTouchingFront: 0
+  wallSliding: 0
+  wallSlidingSpeed: 0.5
   sfx_jump: {fileID: 8300000, guid: e11d9d33151c6b14f8f4591c814bf0eb, type: 3}
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
   sfx_running: {fileID: 8300000, guid: 83beb3522a0baed43a0c83948f7dfbbd, type: 3}
@@ -375,7 +377,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 3.2467022, y: 11.769822}
   m_AutoConfigureDistance: 1
-  m_Distance: 5.0945477
+  m_Distance: 34.11114
   m_MaxDistanceOnly: 1
 --- !u!120 &1558154520
 LineRenderer:
