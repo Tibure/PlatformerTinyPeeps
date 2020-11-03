@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class PlayerPlateformerController : PhysicsObject
@@ -44,13 +45,13 @@ public class PlayerPlateformerController : PhysicsObject
 				velocity.y = velocity.y * .5f;
 			}
 		} 
-		if (move.x != 0 && !isRunning && !isDashing && isGrounded)
+		if (velocity.x != 0 && !isRunning && !isDashing && isGrounded)
 		{
 			PlayWalkingSound();
 		}
-		else if (move.x == 0 && velocity.y == 0 && !isDashing)
+		else if (velocity.x == 0)
 		{
-			audioSource.Stop();
+			audioSource.clip = null;
 		}
 		UpdateAnimator();
 	}
@@ -69,10 +70,10 @@ public class PlayerPlateformerController : PhysicsObject
 		Vector3 distanceRaycast = myMousePos - gameObject.transform.position;
 		distanceRaycast.z = 0;
 		myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
-		if (myRaycast.collider != null)
+		if (myRaycast.collider == null)
 		{
-			/* print(myRaycast.collider.gameObject.tag);
-			print(myRaycast.collider.gameObject.layer); */
+			layerMask = 1 << 13;
+			myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
 		}
 
 		if (Input.GetMouseButtonDown(0) && checkClick && myRaycast.collider.gameObject.tag == "ground" && !isGrapplingInCoolDown)
@@ -98,7 +99,6 @@ public class PlayerPlateformerController : PhysicsObject
 			timerGrappling = grapplingCooldown;
 			rb2d.velocity = Vector2.zero;
 		}
-
 		DrawGrapplinLine();
 	}
 	protected override void DrawGrapplinLine()
@@ -151,6 +151,25 @@ public class PlayerPlateformerController : PhysicsObject
 			}
 		}
 	}
+	protected override void CrossPlateform()
+	{
+		Vector2 GroundCheckLocation = new Vector2(rb2d.position.x, (rb2d.position.y - 0.7f));
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(GroundCheckLocation, groundCheckRadius, traversableGroundLayer);
+		if (colliders.Length > 0)
+		{
+			PlayCrossPlateformSound();
+			TraversableFloorTileMap.GetComponent<TilemapCollider2D>().enabled = false;
+			Invoke("SetColliderTraversableFloor", 0.65f);
+		}
+		else 
+		{
+			PlayCrossPlateformErrorSound();
+		}
+	}
+	private void SetColliderTraversableFloor()
+	{
+		TraversableFloorTileMap.GetComponent<TilemapCollider2D>().enabled = true;
+	}
 	protected override void WallCheck()
 	{
 		float flipValue = spriteRenderer.flipX ? -0.4f : 0.4f ;
@@ -163,11 +182,11 @@ public class PlayerPlateformerController : PhysicsObject
 		 }else{
 			 wallSliding = false;
 		 }
-
-		 if(wallSliding){
-			 /* rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y, -wallSlidingSpeed, float.MaxValue)); */
-			 //apparament ne fonctionne pas...
-		 }
+		if (wallSliding)
+		{
+			//rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y - 3, -wallSlidingSpeed, float.MaxValue));
+			//marche pas 
+		}
 	}
 	protected override void GroundCheck()
 	{
@@ -178,27 +197,43 @@ public class PlayerPlateformerController : PhysicsObject
 		{
 			isGrounded = true;
 		}
+		else
+		{
+			colliders = Physics2D.OverlapCircleAll(GroundCheckLocation, groundCheckRadius, traversableGroundLayer);
+			if (colliders.Length > 0)
+			{
+				isGrounded = true;
+			}
+		}
 		isJumping = !isGrounded;
 		animator.SetBool("isJumping", isJumping);
+	}
+	private void PlayCrossPlateformSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_crossPlateform);
+	}
+	private void PlayCrossPlateformErrorSound()
+	{
+		print("coucou1");
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_errorCrossPlateform);
+		print("coucou2");
 	}
 	private void PlayJumpSound()
 	{
 		audioSource.loop = false;
-		audioSource.clip = sfx_jump;
-		audioSource.Play();
+		audioSource.PlayOneShot(sfx_jump);
 	}
 	protected override void PlayDashSound()
 	{
-		print("PlayDashSound");
 		audioSource.loop = false;
 		audioSource.PlayOneShot(sfx_dash);
-		print("PlayDashSoundFin");
 	}
 	private void PlayGrapplingSound()
 	{
 		audioSource.loop = false;
-		audioSource.clip = sfx_grappling;
-		audioSource.Play();
+		audioSource.PlayOneShot(sfx_grappling);
 	}
 	private void PlayRunningSound()
 	{

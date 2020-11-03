@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class PhysicsObject : MonoBehaviour
@@ -30,6 +31,7 @@ public class PhysicsObject : MonoBehaviour
     ///////////////
     [SerializeField] protected bool isGrounded = true;
     [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] protected LayerMask traversableGroundLayer;
     protected const float groundCheckRadius = 0.2f;
     protected Vector2 groundNormal;
     public float minGroundNormalY = .65f;
@@ -49,7 +51,7 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected float wallSlidingSpeed = 0.5f;
     ///////////////
     protected AudioSource audioSource;
-    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash;
+    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash, sfx_errorCrossPlateform, sfx_crossPlateform;
     [SerializeField] protected bool DashSoundHasBeenPlayed = false;
     ///////////////
     protected bool isDashing;
@@ -79,6 +81,9 @@ public class PhysicsObject : MonoBehaviour
     protected bool isGrapplingInCoolDown;
     protected float timerGrappling;
     [SerializeField] protected float grapplingCooldown;
+    ///////////////
+    [SerializeField] protected Tilemap TraversableFloorTileMap;
+
 
     private void OnEnable()
     {
@@ -103,11 +108,8 @@ public class PhysicsObject : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        UpdateGrapplin();        
+    {   
         GroundCheck();
-        WallCheck();
-
         if (timerDash < 1)
         {
             dashText.text = "✔";
@@ -123,6 +125,7 @@ public class PhysicsObject : MonoBehaviour
         if (timerGrappling < 1)
         {
             grapplingText.text = "✔";
+            UpdateGrapplin();
             isGrapplingInCoolDown = false;
         }
         else
@@ -131,7 +134,9 @@ public class PhysicsObject : MonoBehaviour
             grapplingText.text = Mathf.Round(timerGrappling).ToString();
             isGrapplingInCoolDown = true;
         }
+
         targetVelocity = Vector2.zero;
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isRunning = true;
@@ -147,23 +152,29 @@ public class PhysicsObject : MonoBehaviour
                 Dash();
             }
         }
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            CrossPlateform();
+        }
         ComputeVelocity();
-
     }
     private void FixedUpdate()
     {
-        if (!isDashing && !isGrappling)
+        if (!wallSliding)
         {
-            velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
+            if (!isDashing && !isGrappling)
+            {
+                velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
+            }
+            velocity.x = targetVelocity.x;
+            isGrounded = false;
+            Vector2 deltaPosition = velocity * Time.deltaTime;
+            Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+            Vector2 move = moveAlongGround * deltaPosition.x;
+            Movement(move, false);
+            move = Vector2.up * deltaPosition.y;
+            Movement(move, true);
         }
-        velocity.x = targetVelocity.x;
-        isGrounded = false;
-        Vector2 deltaPosition = velocity * Time.deltaTime;
-        Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
-        Vector2 move = moveAlongGround * deltaPosition.x;
-        Movement(move, false);
-        move = Vector2.up * deltaPosition.y;
-        Movement(move, true);
     }
     void Movement(Vector2 move, bool yMovement)
     {
@@ -212,6 +223,7 @@ public class PhysicsObject : MonoBehaviour
     }
     ////////////////////
     //Fonction Virtuelle
+    protected virtual void CrossPlateform() { }
     protected virtual void ComputeVelocity()
     {
 

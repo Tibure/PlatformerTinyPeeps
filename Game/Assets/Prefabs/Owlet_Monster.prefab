@@ -141,6 +141,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  traversableGroundLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   minGroundNormalY: 0.65
   maxSpeed: 7
   velocity: {x: 0, y: 0}
@@ -154,6 +157,9 @@ MonoBehaviour:
   sfx_walk: {fileID: 8300000, guid: ecc22135c865421428ffbb3b4c6eb7a9, type: 3}
   sfx_grappling: {fileID: 8300000, guid: 5a4014a6ad7f3d943be70acf7f7bbb84, type: 3}
   sfx_dash: {fileID: 8300000, guid: 7c11bf4013534d445ac494661f7e064f, type: 3}
+  sfx_errorCrossPlateform: {fileID: 8300000, guid: a9552cce73bd66249a275ed6b973cb14,
+    type: 3}
+  sfx_crossPlateform: {fileID: 8300000, guid: 691ae3bfdc2184b49833e4ad56adccd4, type: 3}
   DashSoundHasBeenPlayed: 0
   dashTime: 0.15
   dashSpeed: 35
@@ -163,6 +169,7 @@ MonoBehaviour:
   isGrappling: 0
   grapplingText: {fileID: 0}
   grapplingCooldown: 5
+  TraversableFloorTileMap: {fileID: 0}
 --- !u!50 &6174316240642418483
 Rigidbody2D:
   serializedVersion: 4
