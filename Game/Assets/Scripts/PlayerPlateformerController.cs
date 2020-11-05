@@ -23,7 +23,7 @@ public class PlayerPlateformerController : PhysicsObject
         {
 			targetVelocity = move * maxSpeed;
 		}
-		if (isRunning && canMove)
+		if (isRunning && canMove && isGrounded)
 		{
 			targetVelocity *= runSpeedModifier;
 			PlayRunningSound();
@@ -234,6 +234,7 @@ public class PlayerPlateformerController : PhysicsObject
 	{
 		audioSource.loop = false;
 		audioSource.PlayOneShot(sfx_grappling);
+		audioSource.clip = null;
 	}
 	private void PlayRunningSound()
 	{
