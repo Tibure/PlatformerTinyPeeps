@@ -26,7 +26,13 @@ public class PlayerPlateformerController : PhysicsObject
 		}
         if (canMove)
         {
+			if(!isWallJumping)
 			targetVelocity = move * maxSpeed;
+			else{
+			targetVelocity.x = Mathf.Clamp(targetVelocity.x + ((move.x * maxSpeed*2)*Time.deltaTime), -7, 7f);
+			print("entrée dans le else");
+			}
+
 		}
 		if (isRunning && canMove && isGrounded)
 		{
@@ -42,6 +48,13 @@ public class PlayerPlateformerController : PhysicsObject
 			velocity.y = jumpTakeOffSpeed;
 			isJumping = true;
 			PlayJumpSound();
+		}else if(Input.GetButtonDown("Jump") && wallSliding){
+			wallJumpSide = Input.GetAxisRaw("Horizontal");
+			velocity.y = jumpTakeOffSpeed;
+			targetVelocity.x = (-wallJumpSide*jumpTakeOffSpeed);
+			wallSliding = false;
+			isWallJumping = true;
+			Invoke("isNotWallJumpingAnymore", (0.4f));//this will happen after 2 seconds
 		}
 		else if (Input.GetButtonUp("Jump"))
 		{
@@ -176,22 +189,19 @@ public class PlayerPlateformerController : PhysicsObject
 		TraversableFloorTileMap.GetComponent<TilemapCollider2D>().enabled = true;
 	}
 	protected override void WallCheck()
-	{
-		float flipValue = spriteRenderer.flipX ? -0.4f : 0.4f ;
+	{	
+		float inputSide = Input.GetAxisRaw("Horizontal");
+		float flipValue = inputSide == -1 ? -0.4f : 0.4f;
 
-		Vector2 frontCheckLocation = new Vector2(rb2d.position.x +flipValue , rb2d.position.y);
+		Vector2 frontCheckLocation = new Vector2(rb2d.position.x + flipValue , rb2d.position.y);
+
 		 isTouchingFront = Physics2D.OverlapCircle(frontCheckLocation, groundCheckRadius, groundLayer);
-		 if( isTouchingFront == true && isGrounded == false && Input.GetAxisRaw("Horizontal") != 0f){
+		 print(inputSide + " || " +  wallJumpSide);
+		 if( isTouchingFront == true && isGrounded == false && inputSide != 0f && inputSide != wallJumpSide){
 			 wallSliding = true;
-			 print(wallSliding);
 		 }else{
 			 wallSliding = false;
 		 }
-		if (wallSliding)
-		{
-			//rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y - 3, -wallSlidingSpeed, float.MaxValue));
-			//marche pas 
-		}
 	}
 	protected override void GroundCheck()
 	{
@@ -201,6 +211,7 @@ public class PlayerPlateformerController : PhysicsObject
 		if (colliders.Length > 0)
 		{
 			isGrounded = true;
+			wallJumpSide = 0f;
 		}
 		else
 		{
