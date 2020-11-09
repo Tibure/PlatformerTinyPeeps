@@ -8,6 +8,11 @@ using UnityEngine.UIElements;
 
 public class PlayerPlateformerController : PhysicsObject
 {
+	void Awake()
+	{
+		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+		gameObject.transform.position = gameMaster.lastCheckPointPos;
+	}
 	protected override void ComputeVelocity()
 	{
 		Vector2 move = Vector2.zero;
