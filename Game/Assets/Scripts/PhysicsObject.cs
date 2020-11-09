@@ -48,6 +48,8 @@ public class PhysicsObject : MonoBehaviour
     ///////////////
     public bool isTouchingFront;
     public bool wallSliding;
+    public float wallJumpSide;
+    public bool isWallJumping;
     [SerializeField] protected float wallSlidingSpeed = 0.5f;
     ///////////////
     protected AudioSource audioSource;
@@ -135,7 +137,7 @@ public class PhysicsObject : MonoBehaviour
             isGrapplingInCoolDown = true;
         }
 
-        targetVelocity = Vector2.zero;
+
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -160,9 +162,10 @@ public class PhysicsObject : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!wallSliding)
-        {
-            if (!isDashing && !isGrappling)
+            if(wallSliding){
+                velocity = new Vector2(velocity.x, Mathf.Clamp(velocity.y - 3, -wallSlidingSpeed, float.MaxValue));
+            }
+            else if (!isDashing && !isGrappling)
             {
                 velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
             }
@@ -174,7 +177,7 @@ public class PhysicsObject : MonoBehaviour
             Movement(move, false);
             move = Vector2.up * deltaPosition.y;
             Movement(move, true);
-        }
+
     }
     void Movement(Vector2 move, bool yMovement)
     {
@@ -220,6 +223,10 @@ public class PhysicsObject : MonoBehaviour
         lastDash = Time.time;
         PlayerAfterImagePool.Instance.GetFromPool();
         lastImageXPosition = rb2d.transform.position.x;
+    }
+
+     void isNotWallJumpingAnymore(){
+         isWallJumping = false;
     }
     ////////////////////
     //Fonction Virtuelle
