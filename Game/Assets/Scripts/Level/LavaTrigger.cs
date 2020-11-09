@@ -15,6 +15,10 @@ public class LavaTrigger : MonoBehaviour
 
     private void RespawnToCheckPoint()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameMaster gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = gm.lastCheckPointPos;
+        FindObjectOfType<LifeCount>().LoseLife();
+        FindObjectOfType<PlayerPlateformerController>().HurtTrigger();
     }
 }

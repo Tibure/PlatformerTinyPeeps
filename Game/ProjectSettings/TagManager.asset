@@ -8,6 +8,8 @@ TagManager:
   - GM
   - Checkpoint
   - Lava
+  - startPosition
+  - audioManager
   layers:
   - Default
   - TransparentFX

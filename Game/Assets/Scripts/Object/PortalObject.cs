@@ -22,16 +22,22 @@ public class PortalObject : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            GameMaster gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            gm.lastCheckPointPos = new Vector2(-31f, 11.2f);
             animator = GetComponent<Animator>();
             animator.SetTrigger("destroyPortal");
             GetComponent<AudioSource>().Stop();
             AudioManager.instance.PlaySFX("portalClose");
-            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).length);
-            animator.SetTrigger("off");
-            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
-            SceneManager.LoadScene("Level-1");
+            Destroy(player);
+            Invoke("CloseGame", 2f);
         }
     }
 
-
+    private void CloseGame()
+    {
+        animator.SetTrigger("off");
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+        SceneManager.LoadScene("Level-1");
+    }
 }

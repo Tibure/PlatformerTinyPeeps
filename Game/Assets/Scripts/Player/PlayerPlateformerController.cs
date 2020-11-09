@@ -30,7 +30,6 @@ public class PlayerPlateformerController : PhysicsObject
 			targetVelocity = move * maxSpeed;
 			else{
 			targetVelocity.x = Mathf.Clamp(targetVelocity.x + ((move.x * maxSpeed*2)*Time.deltaTime), -7, 7f);
-			print("entrée dans le else");
 			}
 
 		}
@@ -67,7 +66,7 @@ public class PlayerPlateformerController : PhysicsObject
 		{
 			PlayWalkingSound();
 		}
-		else if (velocity.x == 0)
+		else if (velocity.x == 0 || wallSliding)
 		{
 			audioSource.clip = null;
 		}
@@ -176,6 +175,7 @@ public class PlayerPlateformerController : PhysicsObject
 		if (colliders.Length > 0)
 		{
 			PlayCrossPlateformSound();
+			isCrossingPlateform = true;
 			TraversableFloorTileMap.GetComponent<TilemapCollider2D>().enabled = false;
 			Invoke("SetColliderTraversableFloor", 0.65f);
 		}
@@ -187,6 +187,7 @@ public class PlayerPlateformerController : PhysicsObject
 	private void SetColliderTraversableFloor()
 	{
 		TraversableFloorTileMap.GetComponent<TilemapCollider2D>().enabled = true;
+		isCrossingPlateform = false;
 	}
 	protected override void WallCheck()
 	{	
@@ -196,9 +197,9 @@ public class PlayerPlateformerController : PhysicsObject
 		Vector2 frontCheckLocation = new Vector2(rb2d.position.x + flipValue , rb2d.position.y);
 
 		 isTouchingFront = Physics2D.OverlapCircle(frontCheckLocation, groundCheckRadius, groundLayer);
-		 print(inputSide + " || " +  wallJumpSide);
-		 if( isTouchingFront == true && isGrounded == false && inputSide != 0f && inputSide != wallJumpSide){
+		 if( isTouchingFront == true && isGrounded == false && inputSide != 0f && inputSide != wallJumpSide && !isCrossingPlateform){
 			 wallSliding = true;
+			 isJumping = false;
 		 }else{
 			 wallSliding = false;
 		 }
@@ -231,10 +232,8 @@ public class PlayerPlateformerController : PhysicsObject
 	}
 	private void PlayCrossPlateformErrorSound()
 	{
-		print("coucou1");
 		audioSource.loop = false;
 		audioSource.PlayOneShot(sfx_errorCrossPlateform);
-		print("coucou2");
 	}
 	private void PlayJumpSound()
 	{
@@ -272,6 +271,7 @@ public class PlayerPlateformerController : PhysicsObject
 	}
 	protected override void UpdateAnimator()
 	{
+		animator.SetBool("isSliding", wallSliding);
 		animator.SetBool("isJumping", isJumping);
 		animator.SetBool("isGrappling", isGrappling);
 		animator.SetBool("isDashing", isDashing);

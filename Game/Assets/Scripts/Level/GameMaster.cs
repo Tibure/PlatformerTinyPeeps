@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
+            lastCheckPointPos = GameObject.FindGameObjectWithTag("startPosition").transform.position;
         }
         else
         {

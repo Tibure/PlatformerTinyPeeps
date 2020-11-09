@@ -18,13 +18,18 @@ public class EmeraldCounter : MonoBehaviour
         portalPosition.position.Set(13, 2, 0);
         //************************************
     }
-    public void GainEmerald()
+    public void GainEmerald(Text emeraldText)
     {
         myEmerald++;
+        UpdateUI(emeraldText);
         if (myEmerald == emeraldNeeded)
         {
             AudioManager.instance.PlaySFX("portalOpen");
             Instantiate(portalObject, portalPosition);
         }       
+    }
+    private void UpdateUI(Text emeraldText)
+    {
+        emeraldText.text = myEmerald.ToString() + "/" + emeraldNeeded.ToString();
     }
 }

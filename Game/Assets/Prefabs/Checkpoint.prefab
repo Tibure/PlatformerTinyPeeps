@@ -122,6 +122,7 @@ MonoBehaviour:
     type: 3}
   RedAnimation: {fileID: 9100000, guid: 7a99c11c2e80f224bb50135f5e72bda7, type: 2}
   GoldAnimation: {fileID: 9100000, guid: 0cd349fc8d8054744a5ae954c164281e, type: 2}
+  sfx_checkpoint: {fileID: 8300000, guid: 34c26905a6a23a14bac6cf7f5e533c3a, type: 3}
 --- !u!58 &-5149884284792916611
 CircleCollider2D:
   m_ObjectHideFlags: 0

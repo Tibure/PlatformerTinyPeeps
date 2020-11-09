@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5302855239457559156}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: audioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,6 @@ MonoBehaviour:
   sfxLibrary: []
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
   sfx_portalOpen: {fileID: 8300000, guid: 225568d8a8c725340837b5b770672c8d, type: 3}
-  sfx_portalIdle: {fileID: 8300000, guid: 6f2ca4560b2c5764fb11c8076207543b, type: 3}
   sfx_portalClose: {fileID: 8300000, guid: 8ca0faad89371e049a59034ab02c39a5, type: 3}
   sfx_EmeraldCollect: {fileID: 8300000, guid: 5c46c0063ab39524e93282e858300d83, type: 3}
   soundObject: {fileID: 2462249880482849891, guid: 8bd1a3afa8e3895489f33044e47f7bf8,

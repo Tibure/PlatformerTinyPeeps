@@ -85,6 +85,7 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected float grapplingCooldown;
     ///////////////
     [SerializeField] protected Tilemap TraversableFloorTileMap;
+    protected bool isCrossingPlateform = false; 
 
 
     private void OnEnable()
@@ -110,7 +111,7 @@ public class PhysicsObject : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         GroundCheck();
         if (timerDash < 1)
         {
