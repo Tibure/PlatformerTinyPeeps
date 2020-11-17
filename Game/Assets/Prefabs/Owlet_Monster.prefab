@@ -159,19 +159,27 @@ MonoBehaviour:
   sfx_walk: {fileID: 8300000, guid: ecc22135c865421428ffbb3b4c6eb7a9, type: 3}
   sfx_grappling: {fileID: 8300000, guid: 5a4014a6ad7f3d943be70acf7f7bbb84, type: 3}
   sfx_dash: {fileID: 8300000, guid: 7c11bf4013534d445ac494661f7e064f, type: 3}
+  sfx_death: {fileID: 0}
   sfx_errorCrossPlateform: {fileID: 8300000, guid: a9552cce73bd66249a275ed6b973cb14,
     type: 3}
   sfx_crossPlateform: {fileID: 8300000, guid: 691ae3bfdc2184b49833e4ad56adccd4, type: 3}
+  sfx_change_player: {fileID: 0}
+  sfx_easter_egg: {fileID: 0}
   DashSoundHasBeenPlayed: 0
   dashTime: 0.15
   dashSpeed: 35
   distanceBetweenImage: 0.5
   dashCooldown: 5
   dashText: {fileID: 0}
+  canMove: 1
   isGrappling: 0
   grapplingText: {fileID: 0}
   grapplingCooldown: 5
   TraversableFloorTileMap: {fileID: 0}
+  bluePlayerAnimationController: {fileID: 9100000, guid: eb0995c5d6781f6459f48e5bc15017b6,
+    type: 2}
+  whitePlayerAnimationController: {fileID: 9100000, guid: db25e6240fd8eab4fa59e2aec7c6388d,
+    type: 2}
 --- !u!50 &6174316240642418483
 Rigidbody2D:
   serializedVersion: 4

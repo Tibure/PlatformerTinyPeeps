@@ -11,15 +11,14 @@ public class PlayerPlateformerController : PhysicsObject
 	void Awake()
 	{
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-		/*switch (gameMaster.getPlayerColorIndex())
+		if (gameMaster.getPlayerColor() == Color.white)
 		{
-			case 1:
-				animator.runtimeAnimatorController = whitePlayerAnimationController;
-				break;
-			case 2:
-				animator.runtimeAnimatorController = bluePlayerAnimationController;
-				break;
-		}*/
+			gameObject.GetComponent<Animator>().runtimeAnimatorController = whitePlayerAnimationController;
+		}
+		else if (gameMaster.getPlayerColor() == Color.blue)
+		{
+			gameObject.GetComponent<Animator>().runtimeAnimatorController = bluePlayerAnimationController;
+		}
 		gameObject.transform.position = gameMaster.lastCheckPointPos;
 	}
 	protected override void ComputeVelocity()
@@ -277,6 +276,24 @@ public class PlayerPlateformerController : PhysicsObject
 			audioSource.clip = sfx_walk;
 			audioSource.Play();
 		}
+	}
+	public void PlayChangePlayerSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_change_player);
+		audioSource.clip = null;
+	}
+	public void PlayDiscoveringEasterEggSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_easter_egg);
+		audioSource.clip = null;
+	}
+	public void PlayDeathSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_death);
+		audioSource.clip = null;
 	}
 	protected override void UpdateAnimator()
 	{

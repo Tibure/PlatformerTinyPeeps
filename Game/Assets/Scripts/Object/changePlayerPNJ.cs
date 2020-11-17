@@ -14,6 +14,7 @@ public class changePlayerPNJ : MonoBehaviour
     private void Reset()
     {
         GetComponent<TilemapCollider2D>().isTrigger = true;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,15 +22,17 @@ public class changePlayerPNJ : MonoBehaviour
         if (collision.tag == "Player")
         {
             GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-            if (gameMaster.getPlayerColorIndex() == 1)
+            if (gameMaster.getPlayerColor() == Color.white)
             {
                 player.GetComponent<Animator>().runtimeAnimatorController = bluePlayerController;
-                gameMaster.setPlayerColorIndex(2);
+                gameMaster.setPlayerColor(Color.blue);
+                FindObjectOfType<PlayerPlateformerController>().PlayChangePlayerSound();
             }
             else 
             {
                 player.GetComponent<Animator>().runtimeAnimatorController = whitePlayerController;
-                gameMaster.setPlayerColorIndex(1);
+                gameMaster.setPlayerColor(Color.white);
+                FindObjectOfType<PlayerPlateformerController>().PlayChangePlayerSound();
             }
         }
     }

@@ -53,7 +53,8 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected float wallSlidingSpeed = 0.5f;
     ///////////////
     protected AudioSource audioSource;
-    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash, sfx_errorCrossPlateform, sfx_crossPlateform;
+    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash, sfx_death,
+                                         sfx_errorCrossPlateform, sfx_crossPlateform, sfx_change_player, sfx_easter_egg;
     [SerializeField] protected bool DashSoundHasBeenPlayed = false;
     ///////////////
     protected bool isDashing;
@@ -68,7 +69,7 @@ public class PhysicsObject : MonoBehaviour
     protected bool isDashInCoolDown;
     protected float timerDash;
     ///////////////
-    protected bool canMove = true;
+    public bool canMove = true;
     protected bool canFlip = true;
     ///////////////
     [SerializeField] protected bool isGrappling = false;
