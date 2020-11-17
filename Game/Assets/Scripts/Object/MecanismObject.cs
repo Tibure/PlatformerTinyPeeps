@@ -13,6 +13,10 @@ public class MecanismObject : MonoBehaviour
     [SerializeField] Tilemap SecretRoomWallTransparent;
     [SerializeField] Tilemap changePlayerPNJ;
     private static bool isActive = false;
+    private void Start()
+    {
+        isActive = false;
+    }
     private void Reset()
     {
         GetComponent<TilemapCollider2D>().isTrigger = true;

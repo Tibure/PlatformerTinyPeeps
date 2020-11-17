@@ -90,14 +90,14 @@ public class PlayerPlateformerController : PhysicsObject
 	{
 		UpdateMousePosition();
 
-		int layerMask = 1 << 8;
+		int layerMask = 1 << LayerMask.NameToLayer("Ground");
 		Debug.DrawLine(gameObject.transform.position, myMousePos);
 		Vector3 distanceRaycast = myMousePos - gameObject.transform.position;
 		distanceRaycast.z = 0;
 		myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
 		if (myRaycast.collider == null)
 		{
-			layerMask = 1 << 13;
+			layerMask = 1 << LayerMask.NameToLayer("TraversableGround"); //Traversable Ground
 			myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
 		}
 
