@@ -11,6 +11,15 @@ public class PlayerPlateformerController : PhysicsObject
 	void Awake()
 	{
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+		/*switch (gameMaster.getPlayerColorIndex())
+		{
+			case 1:
+				animator.runtimeAnimatorController = whitePlayerAnimationController;
+				break;
+			case 2:
+				animator.runtimeAnimatorController = bluePlayerAnimationController;
+				break;
+		}*/
 		gameObject.transform.position = gameMaster.lastCheckPointPos;
 	}
 	protected override void ComputeVelocity()

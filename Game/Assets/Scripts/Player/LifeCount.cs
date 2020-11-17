@@ -10,16 +10,21 @@ public class LifeCount : LevelManager
 
     public void LoseLife()
     {
-        if (livesRemaining==0)
+        if (livesRemaining == 0)
         {
             return;
         }
         livesRemaining--;
         lives[livesRemaining].gameObject.SetActive(false);
 
-        if (livesRemaining==0)
+        if (livesRemaining == 0)
         {
-            Restart();
+            gameObject.GetComponent<Animator>().SetTrigger("DeathTrigger");
+            Invoke("RestartTheGame", 0.80f);
         }
+    }
+    public void RestartTheGame()
+    {
+        Restart();
     }
 }

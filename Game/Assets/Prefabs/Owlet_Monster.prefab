@@ -150,6 +150,8 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0}
   isTouchingFront: 0
   wallSliding: 0
+  wallJumpSide: 0
+  isWallJumping: 0
   wallSlidingSpeed: 0.5
   sfx_jump: {fileID: 8300000, guid: e11d9d33151c6b14f8f4591c814bf0eb, type: 3}
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
@@ -384,7 +386,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 3.2467022, y: 11.769822}
   m_AutoConfigureDistance: 1
-  m_Distance: 34.251446
+  m_Distance: 34.253254
   m_MaxDistanceOnly: 1
 --- !u!120 &1558154520
 LineRenderer:

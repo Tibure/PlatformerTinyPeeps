@@ -85,7 +85,10 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected float grapplingCooldown;
     ///////////////
     [SerializeField] protected Tilemap TraversableFloorTileMap;
-    protected bool isCrossingPlateform = false; 
+    protected bool isCrossingPlateform = false;
+    ///////////////
+    [SerializeField] protected RuntimeAnimatorController bluePlayerAnimationController;
+    [SerializeField] protected RuntimeAnimatorController whitePlayerAnimationController;
 
 
     private void OnEnable()
@@ -137,9 +140,6 @@ public class PhysicsObject : MonoBehaviour
             grapplingText.text = Mathf.Round(timerGrappling).ToString();
             isGrapplingInCoolDown = true;
         }
-
-
-
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isRunning = true;

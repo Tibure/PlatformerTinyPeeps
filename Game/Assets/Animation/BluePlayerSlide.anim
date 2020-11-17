@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WhitePlayerLanding
+  m_Name: BluePlayerSlide
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -6000117232762632187, guid: 65263f5a1f7e0164ca22a1de2211bf1e,
-        type: 3}
-    - time: 0.21666667
-      value: {fileID: 526077734079534435, guid: 65263f5a1f7e0164ca22a1de2211bf1e,
+      value: {fileID: -3037748654745408057, guid: 8360e57280dd3d84e886a8cedc561b21,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,14 +41,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -6000117232762632187, guid: 65263f5a1f7e0164ca22a1de2211bf1e, type: 3}
-    - {fileID: 526077734079534435, guid: 65263f5a1f7e0164ca22a1de2211bf1e, type: 3}
+    - {fileID: -3037748654745408057, guid: 8360e57280dd3d84e886a8cedc561b21, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.23333333
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
