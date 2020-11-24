@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -1383139184236814737
     second: Dude_Monster_Throw_4_3
+  - first:
+      213: 8251398718363961579
+    second: Dude_Monster_Throw_4_0
+  - first:
+      213: -5748583064506809000
+    second: Dude_Monster_Throw_4_1
+  - first:
+      213: 6400933976085136212
+    second: Dude_Monster_Throw_4_2
+  - first:
+      213: 8471939623828514672
+    second: Dude_Monster_Throw_4_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -102,10 +114,10 @@ TextureImporter:
       name: Dude_Monster_Throw_4_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -113,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06eb5a8d275a3abf0800000000000000
-      internalID: -314225636306207136
+      spriteID: be88234aa6bd28270800000000000000
+      internalID: 8251398718363961579
       vertices: []
       indices: 
       edges: []
@@ -123,10 +135,10 @@ TextureImporter:
       name: Dude_Monster_Throw_4_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 37
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,8 +146,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c84b2820c5f682650800000000000000
-      internalID: 6208334527300023436
+      spriteID: 855ce3ef82ee830b0800000000000000
+      internalID: -5748583064506809000
       vertices: []
       indices: 
       edges: []
@@ -144,10 +156,10 @@ TextureImporter:
       name: Dude_Monster_Throw_4_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 72
         y: 0
-        width: 32
-        height: 32
+        width: 18
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cdaaf471bfb7d5d0800000000000000
-      internalID: -3037748654745408057
+      spriteID: 4538843a98fa4d850800000000000000
+      internalID: 6400933976085136212
       vertices: []
       indices: 
       edges: []
@@ -165,10 +177,10 @@ TextureImporter:
       name: Dude_Monster_Throw_4_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 103
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6e14a87d3a1ecce0800000000000000
-      internalID: -1383139184236814737
+      spriteID: 077eadc9330629570800000000000000
+      internalID: 8471939623828514672
       vertices: []
       indices: 
       edges: []

@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: 5998216281440329753
     second: Dude_Monster_Hurt_4_3
+  - first:
+      213: 3406006742196419846
+    second: Dude_Monster_Hurt_4_0
+  - first:
+      213: 7020741170264976655
+    second: Dude_Monster_Hurt_4_1
+  - first:
+      213: 5088335895998553884
+    second: Dude_Monster_Hurt_4_2
+  - first:
+      213: 8028870607685649564
+    second: Dude_Monster_Hurt_4_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -102,10 +114,10 @@ TextureImporter:
       name: Dude_Monster_Hurt_4_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -113,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01a4f10a859fc98f0800000000000000
-      internalID: -532276496897717744
+      spriteID: 60df3331611944f20800000000000000
+      internalID: 3406006742196419846
       vertices: []
       indices: 
       edges: []
@@ -123,10 +135,10 @@ TextureImporter:
       name: Dude_Monster_Hurt_4_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 35
         y: 0
-        width: 32
-        height: 32
+        width: 21
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,8 +146,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b97944782f7adcad0800000000000000
-      internalID: -2680301543122233445
+      spriteID: f0daa9995eeae6160800000000000000
+      internalID: 7020741170264976655
       vertices: []
       indices: 
       edges: []
@@ -144,10 +156,10 @@ TextureImporter:
       name: Dude_Monster_Hurt_4_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 71
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c644148578bd47150800000000000000
-      internalID: 5869557588718339180
+      spriteID: c1fdcdac9866d9640800000000000000
+      internalID: 5088335895998553884
       vertices: []
       indices: 
       edges: []
@@ -165,10 +177,10 @@ TextureImporter:
       name: Dude_Monster_Hurt_4_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 103
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91027359de1fd3350800000000000000
-      internalID: 5998216281440329753
+      spriteID: c948da667474c6f60800000000000000
+      internalID: 8028870607685649564
       vertices: []
       indices: 
       edges: []
