@@ -29,7 +29,7 @@ public class PortalObject : MonoBehaviour
             animator.SetTrigger("destroyPortal");
             GetComponent<AudioSource>().Stop();
             AudioManager.instance.PlaySFX("portalClose");
-            Destroy(player);
+            player.GetComponent<SpriteRenderer>().enabled = false;
             Invoke("CloseGame", 2f);
         }
     }
