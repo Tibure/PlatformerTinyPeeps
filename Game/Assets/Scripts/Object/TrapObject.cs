@@ -17,7 +17,10 @@ public class TrapObject : MonoBehaviour
         if (collision.tag == "Player")
         {
             FindObjectOfType<LifeCount>().LoseLife();
-            FindObjectOfType<PlayerPlateformerController>().HurtTrigger();
+            if (FindObjectOfType<LifeCount>().livesRemaining != 0)
+            {
+                FindObjectOfType<PlayerPlateformerController>().HurtTrigger();
+            }
         }
     }
 }

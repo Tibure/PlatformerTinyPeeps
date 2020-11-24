@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: 859ffcb5698e1e241ac3a77f3026d72b
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -532276496897717744
+    second: Dude_Monster_Hurt_4_0
+  - first:
+      213: -2680301543122233445
+    second: Dude_Monster_Hurt_4_1
+  - first:
+      213: 5869557588718339180
+    second: Dude_Monster_Hurt_4_2
+  - first:
+      213: 5998216281440329753
+    second: Dude_Monster_Hurt_4_3
+  - first:
+      213: 3406006742196419846
+    second: Dude_Monster_Hurt_4_0
+  - first:
+      213: 7020741170264976655
+    second: Dude_Monster_Hurt_4_1
+  - first:
+      213: 5088335895998553884
+    second: Dude_Monster_Hurt_4_2
+  - first:
+      213: 8028870607685649564
+    second: Dude_Monster_Hurt_4_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -31,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -40,12 +64,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -71,9 +95,105 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Dude_Monster_Hurt_4_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60df3331611944f20800000000000000
+      internalID: 3406006742196419846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Hurt_4_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 0
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0daa9995eeae6160800000000000000
+      internalID: 7020741170264976655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Hurt_4_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1fdcdac9866d9640800000000000000
+      internalID: 5088335895998553884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Hurt_4_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 0
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c948da667474c6f60800000000000000
+      internalID: 8028870607685649564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

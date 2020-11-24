@@ -10,6 +10,7 @@ TagManager:
   - Lava
   - startPosition
   - audioManager
+  - secretRoomWall
   layers:
   - Default
   - TransparentFX
@@ -25,9 +26,9 @@ TagManager:
   - Emerald
   - Portal
   - TraversableGround
-  - 
-  - 
-  - 
+  - secretRoomWall
+  - mecanism
+  - changePlayerPNJ
   - 
   - 
   - 

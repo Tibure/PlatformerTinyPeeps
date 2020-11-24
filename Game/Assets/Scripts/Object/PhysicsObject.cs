@@ -53,7 +53,8 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected float wallSlidingSpeed = 0.5f;
     ///////////////
     protected AudioSource audioSource;
-    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash, sfx_errorCrossPlateform, sfx_crossPlateform;
+    [SerializeField] protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash, sfx_death,
+                                         sfx_errorCrossPlateform, sfx_crossPlateform, sfx_change_player, sfx_easter_egg;
     [SerializeField] protected bool DashSoundHasBeenPlayed = false;
     ///////////////
     protected bool isDashing;
@@ -68,7 +69,7 @@ public class PhysicsObject : MonoBehaviour
     protected bool isDashInCoolDown;
     protected float timerDash;
     ///////////////
-    protected bool canMove = true;
+    public bool canMove = true;
     protected bool canFlip = true;
     ///////////////
     [SerializeField] protected bool isGrappling = false;
@@ -85,7 +86,10 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] protected float grapplingCooldown;
     ///////////////
     [SerializeField] protected Tilemap TraversableFloorTileMap;
-    protected bool isCrossingPlateform = false; 
+    protected bool isCrossingPlateform = false;
+    ///////////////
+    [SerializeField] protected RuntimeAnimatorController bluePlayerAnimationController;
+    [SerializeField] protected RuntimeAnimatorController whitePlayerAnimationController;
 
 
     private void OnEnable()
@@ -137,9 +141,6 @@ public class PhysicsObject : MonoBehaviour
             grapplingText.text = Mathf.Round(timerGrappling).ToString();
             isGrapplingInCoolDown = true;
         }
-
-
-
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isRunning = true;

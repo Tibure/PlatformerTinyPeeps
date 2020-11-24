@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     private static GameMaster instance;
+    private static Color playerColor;
     public Vector2 lastCheckPointPos;
 
     void Awake()
@@ -12,6 +13,7 @@ public class GameMaster : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            playerColor = Color.white;
             DontDestroyOnLoad(instance);
             lastCheckPointPos = GameObject.FindGameObjectWithTag("startPosition").transform.position;
         }
@@ -19,5 +21,13 @@ public class GameMaster : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    public Color getPlayerColor()
+    {
+        return playerColor;
+    }
+    public void setPlayerColor(Color newColor)
+    {
+        playerColor = newColor;
     }
 }

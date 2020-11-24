@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: 83215a07fa1d64e4384b70d7b1669862
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6350452448802780410
+    second: Dude_Monster_Run_6_0
+  - first:
+      213: -8528139597194303457
+    second: Dude_Monster_Run_6_1
+  - first:
+      213: -44119017470293146
+    second: Dude_Monster_Run_6_2
+  - first:
+      213: 2561259159778536049
+    second: Dude_Monster_Run_6_3
+  - first:
+      213: 601316478422015684
+    second: Dude_Monster_Run_6_4
+  - first:
+      213: -3813411338940917255
+    second: Dude_Monster_Run_6_5
+  - first:
+      213: -4351644516595868266
+    second: Dude_Monster_Run_6_0
+  - first:
+      213: 6597429888496086618
+    second: Dude_Monster_Run_6_1
+  - first:
+      213: -7063184401364854904
+    second: Dude_Monster_Run_6_2
+  - first:
+      213: -1268516843955931075
+    second: Dude_Monster_Run_6_3
+  - first:
+      213: -6769579280324035034
+    second: Dude_Monster_Run_6_4
+  - first:
+      213: -9147155076241829553
+    second: Dude_Monster_Run_6_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -31,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -40,12 +76,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -71,9 +107,147 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69dd68f3e5adb93c0800000000000000
+      internalID: -4351644516595868266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1
+        width: 18
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5eaa566787ce8b50800000000000000
+      internalID: 6597429888496086618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 887519595378afd90800000000000000
+      internalID: -7063184401364854904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 1
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d38386cb6a2556ee0800000000000000
+      internalID: -1268516843955931075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 1
+        width: 18
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62ef075e28f9d02a0800000000000000
+      internalID: -6769579280324035034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f41d13ffbe6ce0180800000000000000
+      internalID: -9147155076241829553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

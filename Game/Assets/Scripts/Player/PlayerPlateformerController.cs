@@ -11,6 +11,14 @@ public class PlayerPlateformerController : PhysicsObject
 	void Awake()
 	{
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+		if (gameMaster.getPlayerColor() == Color.white)
+		{
+			gameObject.GetComponent<Animator>().runtimeAnimatorController = whitePlayerAnimationController;
+		}
+		else if (gameMaster.getPlayerColor() == Color.blue)
+		{
+			gameObject.GetComponent<Animator>().runtimeAnimatorController = bluePlayerAnimationController;
+		}
 		gameObject.transform.position = gameMaster.lastCheckPointPos;
 	}
 	protected override void ComputeVelocity()
@@ -82,14 +90,14 @@ public class PlayerPlateformerController : PhysicsObject
 	{
 		UpdateMousePosition();
 
-		int layerMask = 1 << 8;
+		int layerMask = 1 << LayerMask.NameToLayer("Ground");
 		Debug.DrawLine(gameObject.transform.position, myMousePos);
 		Vector3 distanceRaycast = myMousePos - gameObject.transform.position;
 		distanceRaycast.z = 0;
 		myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
 		if (myRaycast.collider == null)
 		{
-			layerMask = 1 << 13;
+			layerMask = 1 << LayerMask.NameToLayer("TraversableGround"); //Traversable Ground
 			myRaycast = Physics2D.Raycast(gameObject.transform.position, distanceRaycast, distanceRaycast.magnitude, layerMask);
 		}
 
@@ -268,6 +276,24 @@ public class PlayerPlateformerController : PhysicsObject
 			audioSource.clip = sfx_walk;
 			audioSource.Play();
 		}
+	}
+	public void PlayChangePlayerSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_change_player);
+		audioSource.clip = null;
+	}
+	public void PlayDiscoveringEasterEggSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_easter_egg);
+		audioSource.clip = null;
+	}
+	public void PlayDeathSound()
+	{
+		audioSource.loop = false;
+		audioSource.PlayOneShot(sfx_death);
+		audioSource.clip = null;
 	}
 	protected override void UpdateAnimator()
 	{

@@ -150,6 +150,8 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0}
   isTouchingFront: 0
   wallSliding: 0
+  wallJumpSide: 0
+  isWallJumping: 0
   wallSlidingSpeed: 0.5
   sfx_jump: {fileID: 8300000, guid: e11d9d33151c6b14f8f4591c814bf0eb, type: 3}
   sfx_hurt: {fileID: 8300000, guid: d35712a570272cb46a9e1f83470be43a, type: 3}
@@ -157,19 +159,27 @@ MonoBehaviour:
   sfx_walk: {fileID: 8300000, guid: ecc22135c865421428ffbb3b4c6eb7a9, type: 3}
   sfx_grappling: {fileID: 8300000, guid: 5a4014a6ad7f3d943be70acf7f7bbb84, type: 3}
   sfx_dash: {fileID: 8300000, guid: 7c11bf4013534d445ac494661f7e064f, type: 3}
+  sfx_death: {fileID: 8300000, guid: 2cde3f3f5b610b846a0cfa8fbabef415, type: 3}
   sfx_errorCrossPlateform: {fileID: 8300000, guid: a9552cce73bd66249a275ed6b973cb14,
     type: 3}
   sfx_crossPlateform: {fileID: 8300000, guid: 691ae3bfdc2184b49833e4ad56adccd4, type: 3}
+  sfx_change_player: {fileID: 8300000, guid: 65f0256e9f27aae44a28393687c6f4b0, type: 3}
+  sfx_easter_egg: {fileID: 8300000, guid: 198d32c248ac8a242a34ccaff361184e, type: 3}
   DashSoundHasBeenPlayed: 0
   dashTime: 0.15
   dashSpeed: 35
   distanceBetweenImage: 0.5
   dashCooldown: 5
   dashText: {fileID: 0}
+  canMove: 1
   isGrappling: 0
   grapplingText: {fileID: 0}
   grapplingCooldown: 5
   TraversableFloorTileMap: {fileID: 0}
+  bluePlayerAnimationController: {fileID: 9100000, guid: eb0995c5d6781f6459f48e5bc15017b6,
+    type: 2}
+  whitePlayerAnimationController: {fileID: 9100000, guid: db25e6240fd8eab4fa59e2aec7c6388d,
+    type: 2}
 --- !u!50 &6174316240642418483
 Rigidbody2D:
   serializedVersion: 4
@@ -384,7 +394,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 3.2467022, y: 11.769822}
   m_AutoConfigureDistance: 1
-  m_Distance: 34.251446
+  m_Distance: 34.253254
   m_MaxDistanceOnly: 1
 --- !u!120 &1558154520
 LineRenderer:
