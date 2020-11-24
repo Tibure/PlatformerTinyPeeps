@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class CameraEffect : MonoBehaviour
 {
 	float minSize = 0.001f;
@@ -12,6 +12,7 @@ public class CameraEffect : MonoBehaviour
 	// Start is called before the first frame update
 	public void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
+		print("alloCAm");
 		Graphics.Blit(source, destination, material);
 	}
 
@@ -19,21 +20,27 @@ public class CameraEffect : MonoBehaviour
 	{
 		float size = minSize;
 		while (size < maxSize) {
+			//print("allo " + size);
+
 			size += step;
 			material.SetFloat(pixelSize, size);
+
 		}
 
 	}
-
 	public void UnPixelationOfCamera()
 	{
-		float size = minSize;
-		while (size < maxSize)
-		{
-			size += step;
-			material.SetFloat(pixelSize, size);
-		}
+		material.SetFloat(pixelSize, maxSize);
 
+		float size = maxSize;
+		while (size > minSize)
+		{
+			print("allo " + size);
+			size -= step;
+			material.SetFloat(pixelSize, size);
+			new WaitForSeconds(1);
+			
+		}
 	}
 
 	public void ResetTransitionPixel()

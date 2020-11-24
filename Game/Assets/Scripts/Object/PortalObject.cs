@@ -36,6 +36,7 @@ public class PortalObject : MonoBehaviour
 
     private void CloseGame()
     {
+        FindObjectOfType<CameraEffect>().PixelationOfCamera();
         animator.SetTrigger("off");
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene("Level-1");

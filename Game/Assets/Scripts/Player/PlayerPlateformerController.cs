@@ -10,6 +10,7 @@ public class PlayerPlateformerController : PhysicsObject
 {
 	void Awake()
 	{
+		Invoke("testCamera", 5f);
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
 		if (gameMaster.getPlayerColor() == Color.white)
 		{
@@ -20,6 +21,11 @@ public class PlayerPlateformerController : PhysicsObject
 			gameObject.GetComponent<Animator>().runtimeAnimatorController = bluePlayerAnimationController;
 		}
 		gameObject.transform.position = gameMaster.lastCheckPointPos;
+	}
+	public void testCamera()
+	{
+		FindObjectOfType<CameraEffect>().UnPixelationOfCamera();
+
 	}
 	protected override void ComputeVelocity()
 	{
