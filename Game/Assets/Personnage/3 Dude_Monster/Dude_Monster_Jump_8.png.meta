@@ -26,6 +26,30 @@ TextureImporter:
   - first:
       213: 5039397777894316725
     second: Dude_Monster_Jump_8_7
+  - first:
+      213: 5465627746251400819
+    second: Dude_Monster_Jump_8_0
+  - first:
+      213: -3265902697539289182
+    second: Dude_Monster_Jump_8_1
+  - first:
+      213: -753416843060767740
+    second: Dude_Monster_Jump_8_2
+  - first:
+      213: 1830508165766902083
+    second: Dude_Monster_Jump_8_3
+  - first:
+      213: 4966545703979788804
+    second: Dude_Monster_Jump_8_4
+  - first:
+      213: 4115844871235528197
+    second: Dude_Monster_Jump_8_5
+  - first:
+      213: -3824302006853279382
+    second: Dude_Monster_Jump_8_6
+  - first:
+      213: 1496145515954427498
+    second: Dude_Monster_Jump_8_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,10 +138,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +149,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2640900b0ca328910800000000000000
-      internalID: 1838096197182096482
+      spriteID: 37665d12a7fc9db40800000000000000
+      internalID: 5465627746251400819
       vertices: []
       indices: 
       edges: []
@@ -135,10 +159,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 37
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,8 +170,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e621b051817db080800000000000000
-      internalID: -9170048466037954844
+      spriteID: 2af3e22dcce2da2d0800000000000000
+      internalID: -3265902697539289182
       vertices: []
       indices: 
       edges: []
@@ -156,10 +180,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 68
         y: 0
-        width: 32
-        height: 32
+        width: 22
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +191,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e08e51d27ac6b9720800000000000000
-      internalID: 2853994254141089806
+      spriteID: 404119d7f535b85f0800000000000000
+      internalID: -753416843060767740
       vertices: []
       indices: 
       edges: []
@@ -177,10 +201,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 103
         y: 0
-        width: 32
-        height: 32
+        width: 17
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,8 +212,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 327dfb2963be9e140800000000000000
-      internalID: 4749585901661706019
+      spriteID: 341fcf27a75476910800000000000000
+      internalID: 1830508165766902083
       vertices: []
       indices: 
       edges: []
@@ -198,10 +222,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
+        x: 134
+        y: 3
+        width: 18
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,8 +233,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 839fabd448c125000800000000000000
-      internalID: 23112302655633720
+      spriteID: 40a257ef007bce440800000000000000
+      internalID: 4966545703979788804
       vertices: []
       indices: 
       edges: []
@@ -219,10 +243,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
+        x: 165
+        y: 1
+        width: 20
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,8 +254,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00d8cc321113178c0800000000000000
-      internalID: -4003364644070847232
+      spriteID: 5066b9c8a1b6e1930800000000000000
+      internalID: 4115844871235528197
       vertices: []
       indices: 
       edges: []
@@ -240,10 +264,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_6
       rect:
         serializedVersion: 2
-        x: 192
+        x: 196
         y: 0
-        width: 32
-        height: 32
+        width: 22
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,8 +275,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e4b7cabe5a075590800000000000000
-      internalID: -7685662837107608344
+      spriteID: a6162b736995deac0800000000000000
+      internalID: -3824302006853279382
       vertices: []
       indices: 
       edges: []
@@ -261,10 +285,10 @@ TextureImporter:
       name: Dude_Monster_Jump_8_7
       rect:
         serializedVersion: 2
-        x: 224
+        x: 230
         y: 0
-        width: 32
-        height: 32
+        width: 18
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,8 +296,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ba984144998fe540800000000000000
-      internalID: 5039397777894316725
+      spriteID: a66d1ca7b6063c410800000000000000
+      internalID: 1496145515954427498
       vertices: []
       indices: 
       edges: []

@@ -546,7 +546,7 @@ PrefabInstance:
     - target: {fileID: 7041734161125885018, guid: 7e3775388598605498e3bb33caeb2a12,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11.080994
+      value: -11.080933
       objectReference: {fileID: 0}
     - target: {fileID: 7041734161303295659, guid: 7e3775388598605498e3bb33caeb2a12,
         type: 3}
@@ -729,11 +729,6 @@ PrefabInstance:
       propertyPath: TraversableFloorTileMap
       value: 
       objectReference: {fileID: 355289117}
-    - target: {fileID: 6174316240642418486, guid: eed65a0cf24456a41af2d1e94f3c5dc7,
-        type: 3}
-      propertyPath: sfx_easter_egg
-      value: 
-      objectReference: {fileID: 8300000, guid: 8ca0faad89371e049a59034ab02c39a5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed65a0cf24456a41af2d1e94f3c5dc7, type: 3}
 --- !u!114 &896775711 stripped

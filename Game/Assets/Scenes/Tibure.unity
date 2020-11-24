@@ -547,8 +547,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bbe5455d254064e9b6aed068ab72ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRunning: 0
+  jumpTakeOffSpeed: 7
   gravityModifier: 1
+  isJumping: 0
+  isGrounded: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  traversableGroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   minGroundNormalY: 0.65
+  maxSpeed: 7
+  velocity: {x: 0, y: 0}
+  targetVelocity: {x: 0, y: 0}
+  isTouchingFront: 0
+  wallSliding: 0
+  wallJumpSide: 0
+  isWallJumping: 0
+  wallSlidingSpeed: 0.5
+  sfx_jump: {fileID: 0}
+  sfx_hurt: {fileID: 0}
+  sfx_running: {fileID: 0}
+  sfx_walk: {fileID: 0}
+  sfx_grappling: {fileID: 0}
+  sfx_dash: {fileID: 0}
+  sfx_death: {fileID: 0}
+  sfx_errorCrossPlateform: {fileID: 0}
+  sfx_crossPlateform: {fileID: 0}
+  sfx_change_player: {fileID: 0}
+  sfx_easter_egg: {fileID: 0}
+  DashSoundHasBeenPlayed: 0
+  dashTime: 0
+  dashSpeed: 0
+  distanceBetweenImage: 0
+  dashCooldown: 0
+  dashText: {fileID: 0}
+  canMove: 1
+  isGrappling: 0
+  grapplingText: {fileID: 0}
+  grapplingCooldown: 0
+  TraversableFloorTileMap: {fileID: 0}
+  bluePlayerAnimationController: {fileID: 0}
+  whitePlayerAnimationController: {fileID: 0}
 --- !u!114 &411038190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,10 +603,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26bb1cbf55414a545bb892abdc1c6af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRunning: 0
+  jumpTakeOffSpeed: 11
   gravityModifier: 1.9
+  isJumping: 0
+  isGrounded: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  traversableGroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   minGroundNormalY: 0.65
   maxSpeed: 7
-  jumpTakeOffSpeed: 11
+  velocity: {x: 0, y: 0}
+  targetVelocity: {x: 0, y: 0}
+  isTouchingFront: 0
+  wallSliding: 0
+  wallJumpSide: 0
+  isWallJumping: 0
+  wallSlidingSpeed: 0.5
+  sfx_jump: {fileID: 0}
+  sfx_hurt: {fileID: 0}
+  sfx_running: {fileID: 0}
+  sfx_walk: {fileID: 0}
+  sfx_grappling: {fileID: 0}
+  sfx_dash: {fileID: 0}
+  sfx_death: {fileID: 0}
+  sfx_errorCrossPlateform: {fileID: 0}
+  sfx_crossPlateform: {fileID: 0}
+  sfx_change_player: {fileID: 0}
+  sfx_easter_egg: {fileID: 0}
+  DashSoundHasBeenPlayed: 0
+  dashTime: 0
+  dashSpeed: 0
+  distanceBetweenImage: 0
+  dashCooldown: 0
+  dashText: {fileID: 0}
+  canMove: 1
+  isGrappling: 0
+  grapplingText: {fileID: 0}
+  grapplingCooldown: 0
+  TraversableFloorTileMap: {fileID: 0}
+  bluePlayerAnimationController: {fileID: 0}
+  whitePlayerAnimationController: {fileID: 0}
 --- !u!212 &411038191
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -706,6 +788,7 @@ GameObject:
   - component: {fileID: 1022978607}
   - component: {fileID: 1022978606}
   - component: {fileID: 1022978605}
+  - component: {fileID: 1022978608}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -778,6 +861,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022978608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022978604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10922163c3f7c034fb81f8ee7f8f675a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 7f786d9bb69eb97408aab1df327bc9ed, type: 2}
 --- !u!1 &1783959452
 GameObject:
   m_ObjectHideFlags: 0
