@@ -284,7 +284,7 @@ public class PlayerPlateformerController : MonoBehaviour
 			velocity.y = jumpTakeOffSpeed;
 			isJumping = true;
 			PlayJumpSound();
-		}else if(Input.GetButtonDown("Jump") && wallSliding){
+		}else if(Input.GetButtonDown("Jump") && wallSliding) {
 			wallJumpSide = Input.GetAxisRaw("Horizontal");
 			velocity.y = jumpTakeOffSpeed;
 			targetVelocity.x = (-wallJumpSide*jumpTakeOffSpeed);
@@ -434,7 +434,7 @@ public class PlayerPlateformerController : MonoBehaviour
 		Vector2 frontCheckLocation = new Vector2(rb2d.position.x + flipValue , rb2d.position.y);
 
 		 isTouchingFront = Physics2D.OverlapCircle(frontCheckLocation, groundCheckRadius, groundLayer);
-		 if( isTouchingFront == true && isGrounded == false && inputSide != 0f && inputSide != wallJumpSide && !isCrossingPlateform){
+		 if( isTouchingFront == true && isGrounded == false && inputSide != 0f && inputSide != wallJumpSide && !isCrossingPlateform) {
 			 wallSliding = true;
 			 isJumping = false;
 		 }else{

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class MonsterBehavior : MonoBehaviour
@@ -13,7 +14,7 @@ public class MonsterBehavior : MonoBehaviour
     bool hasMercy = false;
     protected GameObject target;
 
-    protected int LevelsGoneThrough = 3;
+    public int LevelsGoneThrough = 3;
     public int coinsCollected = 0;
     private float timerLastAction = 4f;
     private float ghostDistance = 900f;
@@ -23,25 +24,28 @@ public class MonsterBehavior : MonoBehaviour
         Ghost = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
         GhostSprite = GetComponent<SpriteRenderer>();
+        var name = SceneManager.GetActiveScene().name;
+        LevelsGoneThrough = int.Parse(name.Substring(name.LastIndexOf("-")+1));
     }
 
     // Update is called once per frame
     void Update()
     {   
         
-        if(!doingAction && !hasMercy && coinsCollected > 0){
+        if(!doingAction && !hasMercy && coinsCollected > 0) {
         timerLastAction += Time.deltaTime;
         }
 
-        if(timerLastAction > Mathf.Clamp((minActionRate - coinsCollected), maxActionRate, minActionRate)){
+        if(timerLastAction > Mathf.Clamp((minActionRate - coinsCollected), maxActionRate, minActionRate)) {
             timerLastAction = 0;
             doingAction = true;
-            int action = Random.Range(0, LevelsGoneThrough);
-            print(action);
-            switch(action){
+            int action = Random.Range(0, LevelsGoneThrough+1);
+            switch(action) {
                 case 0:
-                if(LevelsGoneThrough < 2)
+                if(LevelsGoneThrough == 0)
                 ActionDone();
+                else if(LevelsGoneThrough == 1)
+                TeleportNearPlayer();
                 else
                 AttackPlayer();
                 break;
@@ -57,19 +61,19 @@ public class MonsterBehavior : MonoBehaviour
         }
         facePlayer();  
     }
-    void AttackPlayer(){
+    void AttackPlayer() {
         Vector2 dir = target.transform.position - Ghost.transform.position;
         dir = dir.normalized;
         Ghost.AddForce(dir * ghostDistance);
         Invoke("ActionDone" , 1f);     
     }
 
-    void TeleportNearPlayer(){
+    void TeleportNearPlayer() {
         StartCoroutine(FadeGhost(true));
         Invoke("TeleportGhost" , 1.5f);
 
     }
-    void TeleportGhost(){
+    void TeleportGhost() {
         float yDistanceFromTarget = Random.Range(2f, 5f);
         float xDistanceFromTarget = 5f;
         float xLocation = target.transform.position.x +(xDistanceFromTarget*(Random.Range(0,2)*2-1));
@@ -79,48 +83,42 @@ public class MonsterBehavior : MonoBehaviour
         ActionDone();
     }
 
-    IEnumerator FadeGhost(bool fadeAway)
-    { 
-        if (fadeAway)
-        {
-            for (float i = 1; i >= 0; i -= Time.deltaTime)
-            {
+    IEnumerator FadeGhost(bool fadeAway) { 
+        if (fadeAway) {
+            for (float i = 1; i >= 0; i -= Time.deltaTime) {
                 GhostSprite.color = new Color(1, 1, 1, i);
                 yield return null;
             }
         }
-        else
-        {
-            for (float i = 0; i <= 1; i += Time.deltaTime)
-            {
+        else{
+            for (float i = 0; i <= 1; i += Time.deltaTime) {
                 GhostSprite.color = new Color(1, 1, 1, i);
                 yield return null;
             }
         }
     }
-    void ActionDone(){
+    void ActionDone() {
          doingAction = false;
     }
-    void NoMoreMercy(){
+    void NoMoreMercy() {
         hasMercy = false;
     }
-    void facePlayer(){
+    void facePlayer() {
 
     }
-    public void AddCoinsCollected(){
+    public void AddCoinsCollected() {
         coinsCollected++;
     }
 
-    public void ResetCoinsCollected(){
+    public void ResetCoinsCollected() {
         coinsCollected = 0; 
     }
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.tag == "Player"){
+        if(collision.tag == "Player" && !hasMercy) {
+
             FindObjectOfType<LifeCount>().LoseLife();
-            if (FindObjectOfType<LifeCount>().livesRemaining != 0)
-            {
+            if (FindObjectOfType<LifeCount>().livesRemaining != 0) 
                 FindObjectOfType<PlayerPlateformerController>().HurtTrigger();
-            }
             hasMercy = true;
             TeleportNearPlayer();
             Invoke("NoMoreMercy", 3f);
