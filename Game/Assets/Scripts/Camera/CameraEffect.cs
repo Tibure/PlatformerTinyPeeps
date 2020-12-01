@@ -19,7 +19,6 @@ public class CameraEffect : MonoBehaviour
 	{
 		float size = minSize;
 		while (size < maxSize) {
-			//print("allo " + size);
 
 			size += step;
 			material.SetFloat(pixelSize, size);
@@ -34,7 +33,6 @@ public class CameraEffect : MonoBehaviour
 		float size = maxSize;
 		while (size > minSize)
 		{
-			print("allo " + size);
 			size -= step;
 			material.SetFloat(pixelSize, size);
 			new WaitForSeconds(1);

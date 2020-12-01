@@ -21,6 +21,7 @@ public class EmeraldCounter : MonoBehaviour
     public void GainEmerald(Text emeraldText)
     {
         myEmerald++;
+        FindObjectOfType<MonsterBehavior>().AddCoinsCollected();
         UpdateUI(emeraldText);
         if (myEmerald == emeraldNeeded)
         {
