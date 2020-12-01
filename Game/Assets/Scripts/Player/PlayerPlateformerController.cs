@@ -10,7 +10,7 @@ public class PlayerPlateformerController : PhysicsObject
 {
 	void Awake()
 	{
-		Invoke("testCamera", 5f);
+		testCamera();
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
 		if (gameMaster.getPlayerColor() == Color.white)
 		{
@@ -24,7 +24,7 @@ public class PlayerPlateformerController : PhysicsObject
 	}
 	public void testCamera()
 	{
-		FindObjectOfType<CameraEffect>().UnPixelationOfCamera();
+		FindObjectOfType<CameraEffect>().StartCoroutineUnPixelisation();
 
 	}
 	protected override void ComputeVelocity()
