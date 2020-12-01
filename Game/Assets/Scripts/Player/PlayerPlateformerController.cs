@@ -10,7 +10,11 @@ public class PlayerPlateformerController : PhysicsObject
 {
 	void Awake()
 	{
+<<<<<<< HEAD
 		testCamera();
+=======
+		//Invoke("testCamera", 5f);
+>>>>>>> 27b50f7ed5e82d717d661a7ea575a23611efd758
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
 		if (gameMaster.getPlayerColor() == Color.white)
 		{
@@ -172,7 +176,7 @@ public class PlayerPlateformerController : PhysicsObject
 					lastImageXPosition = rb2d.transform.position.x;
 				}
 			}
-			if (dashTimeLeft <= 0 /*|| isTouchingWall*/)
+			if (dashTimeLeft <= 0 || isTouchingFront)
 			{
 				DashSoundHasBeenPlayed = false;
 				isDashing = false;
