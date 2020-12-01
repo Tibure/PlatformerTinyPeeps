@@ -4,17 +4,236 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class PlayerPlateformerController : PhysicsObject
+public class PlayerPlateformerController : MonoBehaviour
 {
+	//Objet Unity
+	///////////////
+	protected Rigidbody2D rb2d;
+	protected ContactFilter2D contactFilter;
+	protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
+	protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
+	protected Animator animator;
+	protected SpriteRenderer spriteRenderer;
+	///////////////
+	//Run variable
+	///////////////
+	protected float runSpeedModifier = 1.5f;
+	[SerializeField] protected bool isRunning = false;
+	///////////////
+	//Jump variable
+	///////////////
+	public float jumpTakeOffSpeed = 7;
+	public float gravityModifier = 1f;
+	[SerializeField] protected bool isJumping = false;
+	///////////////
+	//Grounded Variable
+	///////////////
+	[SerializeField] protected bool isGrounded = true;
+	[SerializeField] protected LayerMask groundLayer;
+	[SerializeField] protected LayerMask traversableGroundLayer;
+	protected const float groundCheckRadius = 0.2f;
+	protected Vector2 groundNormal;
+	public float minGroundNormalY = .65f;
+	///////////////
+	//Velocity variable
+	///////////////
+	public float maxSpeed = 7;
+	protected const float minMoveDistance = 0.001f;
+	protected const float shellRadius = 0.01f;
+	[SerializeField] protected Vector2 velocity;
+	public Vector2 targetVelocity;
+	///////////////
+	// Wall Variables
+	///////////////
+	public bool isTouchingFront;
+	public bool wallSliding;
+	public float wallJumpSide;
+	public bool isWallJumping;
+	[SerializeField] protected float wallSlidingSpeed = 0.5f;
+	///////////////
+	protected AudioSource audioSource;
+	[SerializeField]
+	protected AudioClip sfx_jump, sfx_hurt, sfx_running, sfx_walk, sfx_grappling, sfx_dash, sfx_death,
+										 sfx_errorCrossPlateform, sfx_crossPlateform, sfx_change_player, sfx_easter_egg;
+	[SerializeField] protected bool DashSoundHasBeenPlayed = false;
+	///////////////
+	protected bool isDashing;
+	[SerializeField] protected float dashTime;
+	[SerializeField] protected float dashSpeed;
+	[SerializeField] protected float distanceBetweenImage;
+	[SerializeField] protected float dashCooldown;
+	protected float dashTimeLeft;
+	protected float lastImageXPosition;
+	protected float lastDash = -100f;
+	[SerializeField] protected Text dashText;
+	protected bool isDashInCoolDown;
+	protected float timerDash;
+	///////////////
+	public bool canMove = true;
+	protected bool canFlip = true;
+	///////////////
+	[SerializeField] protected bool isGrappling = false;
+	protected bool checkClick;
+	protected DistanceJoint2D myDistanceJoint2D;
+	protected LineRenderer myLineRenderer;
+	protected RaycastHit2D myRaycast;
+	protected Vector3 myMousePos;
+	protected Vector3 posTempo;
+	protected Camera myCamera;
+	[SerializeField] protected Text grapplingText;
+	protected bool isGrapplingInCoolDown;
+	protected float timerGrappling;
+	[SerializeField] protected float grapplingCooldown;
+	///////////////
+	[SerializeField] protected Tilemap TraversableFloorTileMap;
+	protected bool isCrossingPlateform = false;
+	///////////////
+	[SerializeField] protected RuntimeAnimatorController bluePlayerAnimationController;
+	[SerializeField] protected RuntimeAnimatorController whitePlayerAnimationController;
+
+
+	private void OnEnable()
+	{
+		rb2d = GetComponent<Rigidbody2D>();
+	}
+	void Start()
+	{
+		contactFilter.useTriggers = false;
+		contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+		contactFilter.useLayerMask = true;
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
+		myCamera = Camera.main;
+		myDistanceJoint2D = GetComponent<DistanceJoint2D>();
+		myLineRenderer = GetComponent<LineRenderer>();
+		myDistanceJoint2D.enabled = false;
+		checkClick = true;
+		myLineRenderer.positionCount = 0;
+	}
+	void Update()
+	{
+		GroundCheck();
+		if (timerDash < 1)
+		{
+			dashText.text = "✔";
+			isDashInCoolDown = false;
+		}
+		else
+		{
+			timerDash -= Time.deltaTime;
+			dashText.text = Mathf.Round(timerDash).ToString();
+			isDashInCoolDown = true;
+		}
+
+		if (timerGrappling < 1)
+		{
+			grapplingText.text = "✔";
+			UpdateGrapplin();
+			isGrapplingInCoolDown = false;
+		}
+		else
+		{
+			timerGrappling -= Time.deltaTime;
+			grapplingText.text = Mathf.Round(timerGrappling).ToString();
+			isGrapplingInCoolDown = true;
+		}
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+		{
+			isRunning = true;
+		}
+		if (Input.GetKeyUp(KeyCode.LeftShift))
+		{
+			isRunning = false;
+		}
+		if (Input.GetKeyDown(KeyCode.LeftAlt))
+		{
+			if (!isDashInCoolDown)
+			{
+				Dash();
+			}
+		}
+		if (Input.GetAxis("Vertical") < 0)
+		{
+			CrossPlateform();
+		}
+		ComputeVelocity();
+	}
+	private void FixedUpdate()
+	{
+		if (wallSliding)
+		{
+			velocity = new Vector2(velocity.x, Mathf.Clamp(velocity.y - 3, -wallSlidingSpeed, float.MaxValue));
+		}
+		else if (!isDashing && !isGrappling)
+		{
+			velocity += gravityModifier * Physics2D.gravity * Time.fixedDeltaTime;
+		}
+		velocity.x = targetVelocity.x;
+		isGrounded = false;
+		Vector2 deltaPosition = velocity * Time.deltaTime;
+		Vector2 moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+		Vector2 move = moveAlongGround * deltaPosition.x;
+		Movement(move, false);
+		move = Vector2.up * deltaPosition.y;
+		Movement(move, true);
+
+	}
+	void Movement(Vector2 move, bool yMovement)
+	{
+		float distance = move.magnitude;
+
+		if (distance > minMoveDistance)
+		{
+			int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+			hitBufferList.Clear();
+			for (int i = 0; i < count; i++)
+			{
+				hitBufferList.Add(hitBuffer[i]);
+			}
+			for (int i = 0; i < hitBufferList.Count; i++)
+			{
+				Vector2 currentNormal = hitBufferList[i].normal;
+				if (currentNormal.y > minGroundNormalY)
+				{
+					isGrounded = true;
+					if (yMovement)
+					{
+						groundNormal = currentNormal;
+						currentNormal.x = 0;
+					}
+				}
+				float projection = Vector2.Dot(velocity, currentNormal);
+				if (projection < 0)
+				{
+					velocity = velocity - projection * currentNormal;
+				}
+
+				float modifiedDistance = hitBufferList[i].distance - shellRadius;
+				distance = modifiedDistance < distance ? modifiedDistance : distance;
+			}
+		}
+		rb2d.position = rb2d.position + move.normalized * distance;
+	}
+	private void Dash()
+	{
+		PlayDashSound();
+		isDashing = true;
+		dashTimeLeft = dashTime;
+		lastDash = Time.time;
+		PlayerAfterImagePool.Instance.GetFromPool();
+		lastImageXPosition = rb2d.transform.position.x;
+	}
+	void isNotWallJumpingAnymore()
+	{
+		isWallJumping = false;
+	}
 	void Awake()
 	{
-<<<<<<< HEAD
-		testCamera();
-=======
-		//Invoke("testCamera", 5f);
->>>>>>> 27b50f7ed5e82d717d661a7ea575a23611efd758
+		TransitionCamera();
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
 		if (gameMaster.getPlayerColor() == Color.white)
 		{
@@ -26,12 +245,12 @@ public class PlayerPlateformerController : PhysicsObject
 		}
 		gameObject.transform.position = gameMaster.lastCheckPointPos;
 	}
-	public void testCamera()
+	public void TransitionCamera()
 	{
 		FindObjectOfType<CameraEffect>().StartCoroutineUnPixelisation();
 
 	}
-	protected override void ComputeVelocity()
+	protected void ComputeVelocity()
 	{
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis("Horizontal");
@@ -96,7 +315,7 @@ public class PlayerPlateformerController : PhysicsObject
 		Vector3 test = new Vector3(myRaycast.point.x, myRaycast.point.y, 35);
 		Gizmos.DrawSphere(test, 1);
 	}
-	protected override void UpdateGrapplin()
+	protected void UpdateGrapplin()
 	{
 		UpdateMousePosition();
 
@@ -136,7 +355,7 @@ public class PlayerPlateformerController : PhysicsObject
 		}
 		DrawGrapplinLine();
 	}
-	protected override void DrawGrapplinLine()
+	protected void DrawGrapplinLine()
 	{
 		if (myLineRenderer.positionCount <= 0)
 		{
@@ -145,7 +364,7 @@ public class PlayerPlateformerController : PhysicsObject
 		myLineRenderer.SetPosition(0, transform.position);
 		myLineRenderer.SetPosition(1, myDistanceJoint2D.connectedAnchor);
 	}
-	protected override void UpdateMousePosition()
+	protected void UpdateMousePosition()
 	{
 		myMousePos = myCamera.ScreenToWorldPoint(Input.mousePosition);
 	}
@@ -186,7 +405,7 @@ public class PlayerPlateformerController : PhysicsObject
 			}
 		}
 	}
-	protected override void CrossPlateform()
+	protected void CrossPlateform()
 	{
 		Vector2 GroundCheckLocation = new Vector2(rb2d.position.x, (rb2d.position.y - 0.7f));
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(GroundCheckLocation, groundCheckRadius, traversableGroundLayer);
@@ -207,7 +426,7 @@ public class PlayerPlateformerController : PhysicsObject
 		TraversableFloorTileMap.GetComponent<TilemapCollider2D>().enabled = true;
 		isCrossingPlateform = false;
 	}
-	protected override void WallCheck()
+	protected void WallCheck()
 	{	
 		float inputSide = Input.GetAxisRaw("Horizontal");
 		float flipValue = inputSide == -1 ? -0.4f : 0.4f;
@@ -222,7 +441,7 @@ public class PlayerPlateformerController : PhysicsObject
 			 wallSliding = false;
 		 }
 	}
-	protected override void GroundCheck()
+	protected void GroundCheck()
 	{
 		isGrounded = false;
 		Vector2 GroundCheckLocation = new Vector2(rb2d.position.x, (rb2d.position.y - 0.7f));
@@ -258,7 +477,7 @@ public class PlayerPlateformerController : PhysicsObject
 		audioSource.loop = false;
 		audioSource.PlayOneShot(sfx_jump);
 	}
-	protected override void PlayDashSound()
+	protected void PlayDashSound()
 	{
 		audioSource.loop = false;
 		audioSource.PlayOneShot(sfx_dash);
@@ -305,7 +524,7 @@ public class PlayerPlateformerController : PhysicsObject
 		audioSource.PlayOneShot(sfx_death);
 		audioSource.clip = null;
 	}
-	protected override void UpdateAnimator()
+	protected void UpdateAnimator()
 	{
 		animator.SetBool("isSliding", wallSliding);
 		animator.SetBool("isJumping", isJumping);
@@ -315,7 +534,7 @@ public class PlayerPlateformerController : PhysicsObject
 		animator.SetFloat("xVelocity", Mathf.Abs(targetVelocity.x));
 		
 	}
-	public override void HurtTrigger()
+	public void HurtTrigger()
 	{
 		animator.SetTrigger("HurtTrigger");
 		AudioManager.instance.PlaySFX("hurt");
