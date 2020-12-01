@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MonsterBehavior : MonoBehaviour
 {
-    Rigidbody2D rb2d;
+    public GameObject Ghost;
     float maxActionRate = 1;
     float minActionRate = 7;
     bool DoingAction = false;
@@ -18,7 +18,7 @@ public class MonsterBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponentInParent<Rigidbody2D>();
+        Ghost = GameObject.FindGameObjectWithTag("Ghost");
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -34,6 +34,7 @@ public class MonsterBehavior : MonoBehaviour
              */
             if(!DoingAction){
             DoingAction = true;
+            print("YEET");
             ghostChasePlayer();
             }
 
@@ -44,16 +45,20 @@ public class MonsterBehavior : MonoBehaviour
     void ghostChasePlayer(){
         /* Vector2 ghostPos = new Vector2(rb2d.transform.position.x, rb2d.transform.position.y);
         Vector2 TargetPos = new Vector2(target.transform.position.x, target.transform.position.y); */
-        float angle = Vector2.Angle(rb2d.transform.position, target.transform.position);
+        float angle = Vector2.Angle(Ghost.transform.position, target.transform.position);
+        print(angle);
         Vector2 finalPos = new Vector2 (Mathf.Cos(angle)*ghostDistance, Mathf.Sin(angle)*ghostDistance);
-        var position = Vector2.MoveTowards(rb2d.transform.position, finalPos , ghostSpeed * Time.deltaTime );
-        rb2d.MovePosition(position);
+        print(finalPos);
+        var position = Vector3.MoveTowards(Ghost.transform.position, finalPos , ghostSpeed * Time.deltaTime );
+        print(position);
+        Ghost.transform.position = position;
     }
     void ghostChangeSides(){
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        print("YOUTOUCHED ME");
         if(collision.tag == "Player"){
 
         }

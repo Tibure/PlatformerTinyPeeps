@@ -11,6 +11,7 @@ TagManager:
   - startPosition
   - audioManager
   - secretRoomWall
+  - Ghost
   layers:
   - Default
   - TransparentFX
