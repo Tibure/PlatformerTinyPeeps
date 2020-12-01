@@ -22,6 +22,7 @@ public class PortalObject : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            Invoke("EndOfLevelTransition", 1f);
             GameMaster gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             gm.lastCheckPointPos = new Vector2(-31f, 11.2f);
@@ -30,13 +31,20 @@ public class PortalObject : MonoBehaviour
             GetComponent<AudioSource>().Stop();
             AudioManager.instance.PlaySFX("portalClose");
             player.GetComponent<SpriteRenderer>().enabled = false;
-            Invoke("CloseGame", 2f);
         }
+    }
+
+
+    private void EndOfLevelTransition()
+    {
+        FindObjectOfType<CameraEffect>().StartCoroutinePixelisation();
+        Invoke("CloseGame", 3f);
+
+
     }
 
     private void CloseGame()
     {
-        FindObjectOfType<CameraEffect>().PixelationOfCamera();
         animator.SetTrigger("off");
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene("Level-1");
