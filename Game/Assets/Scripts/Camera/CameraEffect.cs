@@ -12,7 +12,6 @@ public class CameraEffect : MonoBehaviour
 	// Start is called before the first frame update
 	public void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
-		print("alloCAm");
 		Graphics.Blit(source, destination, material);
 	}
 

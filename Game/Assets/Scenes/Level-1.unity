@@ -196,7 +196,6 @@ Tilemap:
     type: 3}
   m_PrefabInstance: {fileID: 1455452041}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1 &522848484 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1897232519242526283, guid: a0ef81fc5ba76a347b0fba37492b18be,
@@ -228,8 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-=======
->>>>>>> 3ef5b534274d109d4ca510dd660c3a09093a945e
 --- !u!1 &699717173
 GameObject:
   m_ObjectHideFlags: 0
