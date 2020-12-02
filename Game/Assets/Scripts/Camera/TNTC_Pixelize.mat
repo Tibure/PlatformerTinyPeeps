@@ -25,5 +25,5 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _FadeScale: 6.94
-    - _PixelSize: -0.000000031897798
+    - _PixelSize: 0.0014999681
     m_Colors: []
