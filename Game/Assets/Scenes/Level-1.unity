@@ -128,6 +128,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5302855239457559156, guid: 5c77a2e41b302c34b906bb9bcb87324e,
+        type: 3}
+      propertyPath: masterMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 2849f4192f5ae714f85f676d84c5b885,
+        type: 2}
     - target: {fileID: 5302855239457559157, guid: 5c77a2e41b302c34b906bb9bcb87324e,
         type: 3}
       propertyPath: m_Name
@@ -2002,6 +2008,12 @@ PrefabInstance:
       propertyPath: portalPosition
       value: 
       objectReference: {fileID: 1458632506}
+    - target: {fileID: 8656280886692458492, guid: 7e079f3eeb5d6384285455f94905af80,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 2849f4192f5ae714f85f676d84c5b885,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e079f3eeb5d6384285455f94905af80, type: 3}
 --- !u!1001 &8797781428448442828

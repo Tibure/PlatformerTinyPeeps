@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> sfxLibrary;
     public AudioClip sfx_hurt, sfx_portalOpen, sfx_portalClose, sfx_EmeraldCollect;
     public GameObject soundObject;
-
+    public AudioMixerGroup masterMixer;
     public void PlaySFX(string SFXName)
     {
         switch (SFXName)
@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
     {
         GameObject newObject = Instantiate(soundObject, transform);
         newObject.GetComponent<AudioSource>().clip = clip;
+        newObject.GetComponent<AudioSource>().outputAudioMixerGroup = masterMixer;
         newObject.GetComponent<AudioSource>().Play();
     }
 }

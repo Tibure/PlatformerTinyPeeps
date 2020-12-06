@@ -565,6 +565,12 @@ PrefabInstance:
       propertyPath: emeraldNeeded
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8656280886692458492, guid: 7e079f3eeb5d6384285455f94905af80,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 2849f4192f5ae714f85f676d84c5b885,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e079f3eeb5d6384285455f94905af80, type: 3}
 --- !u!114 &209969400 stripped
