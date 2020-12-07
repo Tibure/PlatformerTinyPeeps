@@ -348,6 +348,14 @@ PrefabInstance:
       propertyPath: whitePlayerController
       value: 
       objectReference: {fileID: 9100000, guid: db25e6240fd8eab4fa59e2aec7c6388d, type: 2}
+    - target: {fileID: 555710996, guid: 795d6a1e0a94e4545912407b5118c057, type: 3}
+      propertyPath: m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 555710998, guid: 795d6a1e0a94e4545912407b5118c057, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1559523000790540461, guid: 795d6a1e0a94e4545912407b5118c057,
         type: 3}
       propertyPath: emeraldText

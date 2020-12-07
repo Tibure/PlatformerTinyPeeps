@@ -50,3 +50,4 @@ MonoBehaviour:
   sfx_EmeraldCollect: {fileID: 8300000, guid: 5c46c0063ab39524e93282e858300d83, type: 3}
   soundObject: {fileID: 2462249880482849891, guid: 8bd1a3afa8e3895489f33044e47f7bf8,
     type: 3}
+  masterMixer: {fileID: 24300002, guid: 2849f4192f5ae714f85f676d84c5b885, type: 2}

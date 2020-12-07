@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myEmerald: 0
-  emeraldNeeded: 0
+  emeraldNeeded: 7
   portalPosition: {fileID: 0}
   portalObject: {fileID: 3578862333662183028, guid: 874f4be6f934e8847bcf61904b600ef8,
     type: 3}
@@ -364,7 +364,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: -30, y: 11.1}
   m_AutoConfigureDistance: 1
-  m_Distance: 1
+  m_Distance: 26.406033
   m_MaxDistanceOnly: 1
 --- !u!120 &8656280886692458490
 LineRenderer:

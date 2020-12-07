@@ -114,6 +114,8 @@ public class PlayerPlateformerController : MonoBehaviour
 		myDistanceJoint2D.enabled = false;
 		checkClick = true;
 		myLineRenderer.positionCount = 0;
+		GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().lastCheckPointPos = GameObject.FindGameObjectWithTag("startPosition").transform.position;
+		GameObject.FindGameObjectWithTag("Player").transform.position = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().lastCheckPointPos;
 	}
 	void Update()
 	{
@@ -157,7 +159,7 @@ public class PlayerPlateformerController : MonoBehaviour
 				Dash();
 			}
 		}
-		if (Input.GetAxis("Vertical") < 0)
+		if (Input.GetKeyDown(KeyCode.S))
 		{
 			CrossPlateform();
 		}
@@ -249,7 +251,6 @@ public class PlayerPlateformerController : MonoBehaviour
 	public void TransitionCamera()
 	{
 		FindObjectOfType<CameraEffect>().StartCoroutineUnPixelisation();
-
 	}
 	protected void ComputeVelocity()
 	{

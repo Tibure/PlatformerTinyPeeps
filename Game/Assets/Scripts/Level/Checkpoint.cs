@@ -23,7 +23,7 @@ public class Checkpoint : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-        checkpointText.text = "desactivated";
+        checkpointText.text = "deactivated";
     }
     void OnTriggerEnter2D(Collider2D other)
     {

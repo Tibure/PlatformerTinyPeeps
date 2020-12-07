@@ -25,7 +25,6 @@ public class PortalObject : MonoBehaviour
             Invoke("EndOfLevelTransition", 1f);
             GameMaster gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            gm.lastCheckPointPos = new Vector2(-31f, 11.2f);
             animator = GetComponent<Animator>();
             animator.SetTrigger("destroyPortal");
             GetComponent<AudioSource>().Stop();
@@ -39,14 +38,20 @@ public class PortalObject : MonoBehaviour
     {
         FindObjectOfType<CameraEffect>().StartCoroutinePixelisation();
         Invoke("CloseGame", 3f);
-
-
     }
 
     private void CloseGame()
     {
         animator.SetTrigger("off");
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
-        SceneManager.LoadScene("Level-1");
+        int NextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (NextIndex == 4)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(NextIndex);
+        }
     }
 }

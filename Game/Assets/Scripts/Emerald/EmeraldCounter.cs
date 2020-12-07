@@ -15,7 +15,6 @@ public class EmeraldCounter : MonoBehaviour
         //temporaire pour faire afficher le portal sans avoir de script donne de lvl
         myEmerald = 0;
         emeraldNeeded = 7;
-        portalPosition.position.Set(13, 2, 0);
         //************************************
     }
     public void GainEmerald(Text emeraldText)

@@ -7,13 +7,20 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public AudioSource menuMusic;
+
     public void PlayGame()
     {
         menuMusic.Stop();
+        FindObjectOfType<CameraEffect>().StartCoroutinePixelisation();
+        Invoke("ChangeScene", 3f);
+    }
+    public void ChangeScene()
+    { 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void ExitGame()
     {
+        FindObjectOfType<CameraEffect>().StartCoroutinePixelisation();
         Application.Quit();
     }
 }

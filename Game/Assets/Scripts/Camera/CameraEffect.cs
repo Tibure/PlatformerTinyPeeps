@@ -16,23 +16,10 @@ public class CameraEffect : MonoBehaviour
 		step = maxSize / (transitionTime / updateFrequency);
 
 	}
-	// Start is called before the first frame update
 	public void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
 		Graphics.Blit(source, destination, material);
 	}
-/*
-	public void PixelationOfCamera()
-	{
-		float size = minSize;
-		while (size < maxSize) {
-
-			size += step;
-			material.SetFloat(pixelSize, size);
-
-		}
-
-	}*/
 	public void ResetTransitionPixel()
 	{
 		material.SetFloat(pixelSize, minSize);
