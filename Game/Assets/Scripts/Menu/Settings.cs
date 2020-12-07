@@ -10,6 +10,19 @@ public class Settings : MonoBehaviour
     public AudioSource sound;
     public Slider sliderVolume;
     public Toggle toggleMute;
+
+    public void Start()
+    {
+        float volume = 0f;
+        audioMixer.GetFloat("volume", out volume);
+        print(volume);
+        sliderVolume.value = volume;
+        if (volume == sliderVolume.minValue)
+        {
+            toggleMute.isOn = true;
+            Mute(true);
+        }
+    }
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);

@@ -30,6 +30,8 @@ public class PortalObject : MonoBehaviour
             GetComponent<AudioSource>().Stop();
             AudioManager.instance.PlaySFX("portalClose");
             player.GetComponent<SpriteRenderer>().enabled = false;
+            player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            GameObject.FindGameObjectWithTag("Ghost").GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         }
     }
 
