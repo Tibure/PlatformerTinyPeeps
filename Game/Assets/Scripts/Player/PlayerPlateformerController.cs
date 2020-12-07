@@ -6,6 +6,7 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerPlateformerController : MonoBehaviour
@@ -163,7 +164,17 @@ public class PlayerPlateformerController : MonoBehaviour
 		{
 			CrossPlateform();
 		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			FindObjectOfType<CameraEffect>().StartCoroutinePixelisation();
+			Invoke("ChangeScene", 3f);
+
+		}
 		ComputeVelocity();
+	}
+	private void ChangeScene()
+	{
+		SceneManager.LoadScene(0);
 	}
 	private void FixedUpdate()
 	{
@@ -236,7 +247,7 @@ public class PlayerPlateformerController : MonoBehaviour
 	}
 	void Awake()
 	{
-		TransitionCamera();
+		FindObjectOfType<CameraEffect>().StartCoroutineUnPixelisation();
 		GameMaster gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
 		if (gameMaster.getPlayerColor() == Color.white)
 		{
@@ -247,10 +258,6 @@ public class PlayerPlateformerController : MonoBehaviour
 			gameObject.GetComponent<Animator>().runtimeAnimatorController = bluePlayerAnimationController;
 		}
 		gameObject.transform.position = gameMaster.lastCheckPointPos;
-	}
-	public void TransitionCamera()
-	{
-		FindObjectOfType<CameraEffect>().StartCoroutineUnPixelisation();
 	}
 	protected void ComputeVelocity()
 	{
