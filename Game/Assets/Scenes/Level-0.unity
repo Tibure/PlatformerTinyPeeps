@@ -2660,7 +2660,7 @@ PrefabInstance:
     - target: {fileID: 8686304800675539372, guid: 13bd6b1ca2be6a441880af9e1c129831,
         type: 3}
       propertyPath: m_text
-      value: 'SD to move Left-Right
+      value: 'AD to move Left-Right
 
         Space to jump
 
